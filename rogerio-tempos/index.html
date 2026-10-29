@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rogério Bevilacqua no BKR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  --font-anthropic-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-anthropic-serif: "Source Serif 4", Georgia, serif;
+  --color-fg: #16191b; --color-fg-muted: #5d6468; --color-bg: #f4f5f4; --color-panel: #ffffff;
+  --color-border-line: #dde1df; --color-bad: #c0392b; --color-ok: #2f7d43; --color-warn: #b7791f;
+  --cds-border: #d5d9d7; --cds-chart-axis: #8a9296; --cds-chart-muted: #b9c0bd; --cds-chart-reference: #8a9296;
+  --cds-surface-popover: #ffffff; --cds-shadow-popover: 0 6px 20px rgba(0,0,0,.14); --cds-dur-slow: .3s;
+  --cds-font-size-body: 15px; --cds-font-size-caption: 13px; --cds-font-size-heading: 17px; --cds-font-size-title: 28px;
+  --cds-font-weight-medium: 600; --cds-gap-lg: 24px; --cds-gap-md: 16px; --cds-gap-sm: 10px; --cds-gap-xs: 4px;
+  --cds-pad-lg: 18px; --cds-pad-sm: 10px; --cds-pad-xs: 4px; --cds-radius: 8px;
+}
+html, body { margin: 0; background: var(--color-bg); }
+body { padding: 20px 16px 48px; font-family: var(--font-anthropic-sans); }
+#dash-root { max-width: 1280px; margin: 0 auto; }
+.tb-carregando { color: var(--color-fg-muted); font-size: 13px; }
+</style>
+<script>
+window.dash = (() => {
+  const store = {}, draws = [], ouvintes = [];
+  let params = {"comparar": [], "sessao": null, "tracado": null, "quais": "dele"};
+  const roda = (fn, el) => { try { fn(el); } catch (e) { console.error(e); } };
+  const tudo = () => {
+    ouvintes.forEach((fn) => roda(fn));
+    draws.forEach(([nome, fn]) => document.querySelectorAll('[data-draw="' + nome + '"]').forEach((el) => roda(fn, el)));
+  };
+  let pend = false;
+  const agenda = () => { if (pend) return; pend = true; requestAnimationFrame(() => { pend = false; tudo(); }); };
+  window.addEventListener('resize', agenda);
+  return {
+    colors: ['#e0a800', '#2f6fb0', '#c2410c', '#15803d', '#7c3aed', '#be185d', '#0e7490', '#4d7c0f'],
+    data: (id) => store[id] ? { status: 'ok', data: store[id], rows: store[id], refreshing: false, meta: [] }
+                            : { status: 'loading', data: [], rows: [], refreshing: false, meta: [] },
+    onData: (fn) => { ouvintes.push(fn); agenda(); },
+    draw: (nome, fn) => { draws.push([nome, fn]); agenda(); },
+    params: () => params,
+    setParams: (p) => { params = Object.assign({}, params, p); agenda(); },
+    resetParams: () => { params = {"comparar": [], "sessao": null, "tracado": null, "quais": "dele"}; agenda(); },
+    refresh: () => {}, setLink: () => {}, calc: () => {}, loader: () => {},
+    _carrega: (id, rows) => { store[id] = rows; agenda(); },
+  };
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<meta name="dash-one-writer">
+<style>
+  #dash-root { --dash-gutter: clamp(12px, 3vw, 32px); }
+  .tb { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: grid; gap: var(--cds-gap-lg); max-width: 1280px; margin-inline: auto; }
+  .tb-head { display: grid; gap: var(--cds-gap-xs); }
+  .tb-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+  .tb-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .tb-filters { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .tb-filters label { display: grid; gap: 2px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-width: 0; }
+  .tb-filters select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 4px 8px; max-width: 100%; }
+  .tb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); gap: var(--cds-gap-md); }
+  .tb-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+  .tb-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .tb-card .tb-sub { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .tb-wide { grid-column: 1 / -1; }
+  .tb-chart { position: relative; min-height: 300px; }
+  .tb-strip { position: relative; min-height: 120px; }
+  .tb-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+  .tb-scroll { max-height: 26rem; overflow: auto; }
+  .tb-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .tb-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: 4px 6px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .tb-table td { padding: 3px 6px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .tb-table td.tb-n, .tb-table th.tb-n { text-align: right; }
+  .tb-table tr.tb-me td { font-weight: 600; background: color-mix(in srgb, var(--color-panel) 80%, #f2c200 20%); }
+  .tb-table tr.tb-pick td:first-child { box-shadow: inset 3px 0 0 currentColor; }
+  .tb-table tr.tb-off td { color: var(--color-bad); }
+  .tb-table tbody tr { cursor: pointer; }
+  .tb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tb-chips label { display: inline-flex; gap: 4px; align-items: center; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); border-radius: 999px; padding: 2px 8px; cursor: pointer; }
+  .tb-kpis { display: flex; flex-wrap: wrap; gap: var(--cds-gap-lg); }
+  .tb-kpi { display: grid; gap: 2px; }
+  .tb-kpi .k { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .tb-kpi .v { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  [data-dash-source-state=empty] { color: transparent; }
+</style>
+
+<div class="tb">
+  <header class="tb-head" id="topo">
+    <h1 class="tb-title">Rogério Bevilacqua no BKR</h1>
+    <p class="tb-note">Treinos no Speed Park, Birigui. Toda volta de todo piloto que a cronometragem publicou, com o Rogério em destaque. As baterias em que ele andou levam ★ na lista; troque para "Todas" para ver as outras. Setor a setor não existe: o LiveTime, o PDF oficial e a AMIKA só publicam o tempo da volta inteira.</p>
+  </header>
+
+  <div class="tb-filters" id="filtros">
+    <label>Traçado
+      <select class="tb-f-tracado" aria-label="Traçado">
+        <option value="">Todos</option>
+        <option value="A">A · Interlagos horário</option>
+        <option value="B">B · Fuji anti-horário</option>
+        <option value="C">C · Suzuka horário</option>
+      </select>
+    </label>
+    <label>Mostrar
+      <select class="tb-f-quais" aria-label="Quais baterias">
+        <option value="dele">Só as do Rogério ★</option>
+        <option value="todas">Todas</option>
+      </select>
+    </label>
+    <label>Bateria
+      <select data-draw="sessao" data-source="sessoes" aria-label="Bateria"></select>
+    </label>
+  </div>
+
+  <section class="tb-card tb-wide" id="minhas">
+    <h2>As baterias do Rogério</h2>
+    <p class="tb-sub">Cada bateria em que ele andou, com a posição entre os pilotos daquela bateria. Clique numa linha para abrir a bateria.</p>
+    <div class="tb-scroll">
+      <table class="tb-table" data-source="pilotos" data-row-key="sessao_id,kart">
+        <thead><tr>
+          <th data-field="dia">Dia</th>
+          <th data-field="hora">Hora</th>
+          <th data-field="tracado">Traçado</th>
+          <th data-field="condicao">Condição</th>
+          <th class="tb-n" data-field="kart">Kart</th>
+          <th class="tb-n" data-field="melhor">Melhor</th>
+          <th class="tb-n" data-field="pos">Pos.</th>
+          <th class="tb-n" data-field="de">De</th>
+          <th class="tb-n" data-field="gap_lider">Do 1º</th>
+          <th class="tb-n" data-field="vs_mediana">Vs. mediana</th>
+          <th class="tb-n" data-field="consistencia">Desvio</th>
+          <th class="tb-n" data-field="pos_oficial">Pos. oficial</th>
+        </tr></thead>
+        <tbody data-draw="minhas"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="tb-card tb-wide" id="bateria">
+    <h2>A bateria escolhida</h2>
+    <div class="tb-kpis">
+      <div class="tb-kpi"><span class="k">Condição</span><span class="v" data-draw="k-cond" data-source="sessoes" data-field="condicao">—</span></div>
+      <div class="tb-kpi"><span class="k">Pilotos</span><span class="v" data-draw="k-pil" data-source="sessoes" data-field="pilotos">—</span></div>
+      <div class="tb-kpi"><span class="k">Mais rápido</span><span class="v" data-draw="k-lider" data-source="sessoes" data-field="lider">—</span></div>
+      <div class="tb-kpi"><span class="k">Mediana das melhores</span><span class="v" data-draw="k-med" data-source="sessoes" data-field="mediana">—</span></div>
+      <div class="tb-kpi"><span class="k">Voltas descartadas</span><span class="v" data-draw="k-desc" data-source="sessoes" data-field="descartadas">—</span></div>
+    </div>
+    <p class="tb-sub">Motivo da condição: <span data-draw="k-motivo" data-source="sessoes" data-field="motivo">—</span>. Origem dos tempos: <span data-draw="k-fonte" data-source="sessoes" data-field="fonte">—</span>; PDF oficial: <span data-draw="k-of" data-source="sessoes" data-field="oficial">—</span>.</p>
+  </section>
+
+  <div class="tb-grid">
+    <section class="tb-card" id="volta-a-volta">
+      <h2>Volta a volta</h2>
+      <p class="tb-sub">O Rogério em amarelo. Marque outros pilotos abaixo ou clique numa linha da classificação. Volta acima de 107% da melhor do piloto fica no topo do gráfico; descartada é um x vermelho.</p>
+      <p class="tb-sub tb-sem-mim" hidden>O Rogério não andou nesta bateria: o gráfico mostra os 3 mais rápidos até alguém ser marcado.</p>
+      <div class="tb-chart" data-draw="laps" data-source="voltas"></div>
+      <div class="tb-chips" data-draw="comparar" data-source="pilotos"></div>
+    </section>
+
+    <section class="tb-card" id="dispersao">
+      <h2>Melhor volta de cada piloto</h2>
+      <p class="tb-sub">Cada ponto é um piloto da bateria; o tracejado é a mediana. Passe o mouse pra ver nome e kart.</p>
+      <div class="tb-strip" data-draw="strip" data-source="pilotos"></div>
+      <h2>Consistência</h2>
+      <p class="tb-sub">Desvio das voltas boas (até 7% da melhor) contra a melhor volta. Embaixo e à esquerda é rápido e constante.</p>
+      <div class="tb-chart" data-draw="consist" data-source="pilotos"></div>
+    </section>
+  </div>
+
+  <section class="tb-card tb-wide" id="classificacao">
+    <h2>Classificação da bateria</h2>
+    <p class="tb-sub">Pela melhor volta válida. Pos. oficial é a do PDF da AMIKA sem os tempos impossíveis que o próprio PDF traz (esses ficam marcados em vermelho, com a posição crua do PDF ao lado). Clique numa linha pra pôr o piloto no gráfico.</p>
+    <div class="tb-scroll">
+      <table class="tb-table tb-class" data-source="pilotos" data-row-key="sessao_id,kart">
+        <thead><tr>
+          <th class="tb-n" data-field="pos">Pos.</th>
+          <th class="tb-n" data-field="kart">Kart</th>
+          <th data-field="piloto">Piloto</th>
+          <th class="tb-n" data-field="melhor">Melhor</th>
+          <th class="tb-n" data-field="gap_lider">Do 1º</th>
+          <th class="tb-n" data-field="vs_mediana">Vs. mediana</th>
+          <th class="tb-n" data-field="media_boas">Média boas</th>
+          <th class="tb-n" data-field="consistencia">Desvio</th>
+          <th class="tb-n" data-field="voltas">Voltas</th>
+          <th class="tb-n" data-field="pos_oficial">Pos. oficial</th>
+          <th class="tb-n" data-field="pos_pdf">Pos. no PDF</th>
+          <th class="tb-n" data-field="melhor_oficial">Melhor oficial</th>
+          <th data-field="oficial_obs">Obs. do PDF</th>
+        </tr></thead>
+        <tbody data-draw="classe"></tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <section class="tb-card tb-wide" id="todas">
+    <h2>Todas as voltas da bateria</h2>
+    <p class="tb-sub">Volta a volta, com a origem de cada tempo; as do Rogério primeiro. Em vermelho, as descartadas (abaixo de 88% da mediana das melhores: erro de cronometragem).</p>
+    <div class="tb-scroll">
+      <table class="tb-table" data-source="voltas" data-row-key="sessao_id,kart,volta">
+        <thead><tr>
+          <th class="tb-n" data-field="kart">Kart</th>
+          <th data-field="piloto">Piloto</th>
+          <th class="tb-n" data-field="volta">Volta</th>
+          <th class="tb-n" data-field="tempo">Tempo</th>
+          <th data-field="fonte">Origem</th>
+          <th data-field="status">Status</th>
+        </tr></thead>
+        <tbody data-draw="todas"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  window.tbFmt = (s) => {
+    if (s == null || isNaN(s)) return '—';
+    const m = Math.floor(s / 60), r = s - m * 60;
+    return (m ? m + ':' + r.toFixed(3).padStart(6, '0') : r.toFixed(3)).replace('.', ',');
+  };
+  window.tbDec = (x, n) => (x == null || isNaN(x)) ? '—' : x.toFixed(n).replace('.', ',');
+  window.tbPct = (x) => (x == null || isNaN(x)) ? '—' : (x > 0 ? '+' : x < 0 ? '−' : '') + Math.abs(x).toFixed(1).replace('.', ',') + '%';
+  window.tbKey = (sid, k) => encodeURIComponent(sid) + ',' + k;
+  window.tbRows = (id) => { const d = dash.data(id); return d.status === 'ok' ? d.data : null; };
+  window.tbMinhas = () => new Set((tbRows('pilotos') || []).filter((r) => r.eu).map((r) => r.sessao_id));
+  window.tbCand = () => {
+    const p = dash.params();
+    const minhas = tbMinhas();
+    return (tbRows('sessoes') || []).filter((x) => (!p.tracado || x.tracado === p.tracado) && (p.quais === 'todas' || minhas.has(x.sessao_id)));
+  };
+  window.tbSessao = () => {
+    const ss = tbRows('sessoes');
+    if (!ss) return null;
+    const cand = tbCand();
+    let s = cand.find((x) => x.sessao_id === dash.params().sessao);
+    if (!s) {
+      const minhas = tbMinhas();
+      s = [...cand].reverse().find((x) => minhas.has(x.sessao_id)) || cand[cand.length - 1] || null;
+    }
+    return s;
+  };
+
+  document.querySelectorAll('.tb-f-quais').forEach((sel) => {
+    sel.addEventListener('change', () => dash.setParams({ quais: sel.value, sessao: null, comparar: [] }));
+  });
+  document.querySelectorAll('.tb-f-tracado').forEach((sel) => {
+    sel.addEventListener('change', () => dash.setParams({ tracado: sel.value || null, sessao: null, comparar: [] }));
+  });
+  window.tbTemEu = (s) => {
+    const pil = tbRows('pilotos');
+    return !!(pil && s && pil.some((r) => r.sessao_id === s.sessao_id && r.eu));
+  };
+  dash.onData(() => {
+    const p = dash.params();
+    document.querySelectorAll('.tb-f-tracado').forEach((sel) => { sel.value = p.tracado || ''; });
+    document.querySelectorAll('.tb-f-quais').forEach((sel) => { sel.value = p.quais === 'todas' ? 'todas' : 'dele'; });
+    const s = tbSessao();
+    const semMim = !!s && !!tbRows('pilotos') && !tbTemEu(s);
+    document.querySelectorAll('.tb-sem-mim').forEach((el) => { el.hidden = !semMim; });
+  });
+
+  dash.draw('sessao', (sel) => {
+    const cand = tbCand();
+    const minhas = tbMinhas();
+    sel.replaceChildren(...cand.map((x) => new Option(`${minhas.has(x.sessao_id) ? '★ ' : ''}${x.dia} ${x.hora} · ${x.sessao.replace(' - TRAÇADO', ' ·')} · ${x.condicao}`, x.sessao_id)));
+    const s = tbSessao();
+    sel.value = s ? s.sessao_id : '';
+    sel.onchange = () => dash.setParams({ sessao: sel.value, comparar: [] });
+  });
+
+  const kpi = (name, field, fmt) => dash.draw(name, (el) => {
+    const s = tbSessao();
+    if (!s) { el.textContent = '—'; return; }
+    el.setAttribute('data-where', 'sessao_id=' + encodeURIComponent(s.sessao_id));
+    el.textContent = fmt ? fmt(s[field]) : String(s[field] ?? '—');
+  });
+  kpi('k-cond', 'condicao');
+  kpi('k-pil', 'pilotos');
+  kpi('k-lider', 'lider', tbFmt);
+  kpi('k-med', 'mediana', tbFmt);
+  kpi('k-desc', 'descartadas');
+  kpi('k-motivo', 'motivo', (v) => v || 'pista dentro do ritmo de seco');
+  kpi('k-fonte', 'fonte');
+  kpi('k-of', 'oficial');
+</script>
+
+<script>
+  dash.draw('comparar', (el) => {
+    const pil = tbRows('pilotos');
+    const s = tbSessao();
+    el.replaceChildren();
+    if (!pil || !s) { el.textContent = '—'; return; }
+    const pick = new Set((dash.params().comparar || []).map(String));
+    pil.filter((r) => r.sessao_id === s.sessao_id && !r.eu).sort((a, b) => a.pos - b.pos).forEach((r) => {
+      const lab = document.createElement('label');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = pick.has(String(r.kart));
+      cb.onchange = () => {
+        const cur = new Set((dash.params().comparar || []).map(String));
+        cb.checked ? cur.add(String(r.kart)) : cur.delete(String(r.kart));
+        dash.setParams({ comparar: [...cur] });
+      };
+      lab.append(cb, document.createTextNode(`${r.pos}º ${r.piloto} (${r.kart})`));
+      el.append(lab);
+    });
+  });
+
+  dash.draw('laps', (el) => {
+    el.replaceChildren();
+    const vol = tbRows('voltas');
+    const s = tbSessao();
+    if (!vol || !s) { el.textContent = '—'; return; }
+    const pick = new Set((dash.params().comparar || []).map(String));
+    if (!pick.size && !tbTemEu(s)) {
+      (tbRows('pilotos') || []).filter((r) => r.sessao_id === s.sessao_id).sort((a, b) => a.pos - b.pos).slice(0, 3)
+        .forEach((r) => pick.add(String(r.kart)));
+    }
+    const rows = vol.filter((v) => v.sessao_id === s.sessao_id && (v.eu || pick.has(String(v.kart))));
+    const series = d3.groups(rows, (v) => v.kart + '|' + v.piloto).map(([k, vs]) => ({ k, kart: vs[0].kart, piloto: vs[0].piloto, eu: vs[0].eu, vs: vs.sort((a, b) => a.volta - b.volta) }));
+    if (!series.length) { el.textContent = '—'; return; }
+    const W = el.clientWidth || 600, H = 300, m = { t: 12, r: 140, b: 28, l: 64 };
+    const valid = rows.filter((v) => v.status === 'Válida');
+    const best = d3.min(valid, (v) => v.tempo) || d3.min(rows, (v) => v.tempo);
+    const top = best * 1.07;
+    const x = d3.scaleLinear([1, d3.max(rows, (v) => v.volta) || 2], [m.l, W - m.r]);
+    const y = d3.scaleLinear([best * 0.995, top], [H - m.b, m.t]);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.min(12, d3.max(rows, (v) => v.volta) || 2)).tickFormat(d3.format('d')))
+      .attr('font-size', null).attr('font-family', null).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--cds-chart-axis)'));
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6).tickFormat(tbFmt))
+      .attr('font-size', null).attr('font-family', null).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--cds-chart-axis)'));
+    const cor = (sr, i) => sr.eu ? '#e0a800' : dash.colors[(i % 7) + 1];
+    const yy = (t) => y(Math.min(t, top));
+    series.forEach((sr, i) => {
+      const ok = sr.vs.filter((v) => v.status === 'Válida');
+      svg.append('path').datum(ok).attr('fill', 'none').attr('stroke', cor(sr, i)).attr('stroke-width', sr.eu ? 3 : 2)
+        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x((v) => x(v.volta)).y((v) => yy(v.tempo)));
+      svg.append('g').selectAll('circle').data(ok).join('circle').attr('cx', (v) => x(v.volta)).attr('cy', (v) => yy(v.tempo)).attr('r', 3).attr('fill', cor(sr, i))
+        .on('mousemove', (ev, v) => tip(ev, `${sr.piloto} · kart ${sr.kart}`, `Volta ${v.volta}: ${tbFmt(v.tempo)}${v.tempo > top ? ' (fora da escala)' : ''}`))
+        .on('mouseleave', () => tipEl.remove());
+      svg.append('g').selectAll('text').data(sr.vs.filter((v) => v.status !== 'Válida')).join('text').attr('x', (v) => x(v.volta)).attr('y', m.t + 8)
+        .attr('text-anchor', 'middle').attr('fill', 'var(--color-bad)').text('x');
+      const last = ok[ok.length - 1];
+      if (last) svg.append('text').attr('x', x(last.volta) + 6).attr('y', yy(last.tempo) + 4).attr('fill', cor(sr, i)).attr('font-size', 11)
+        .text(`${sr.eu ? 'Rogério' : sr.piloto.split(' ')[0]} ${tbFmt(d3.min(ok, (v) => v.tempo))}`);
+    });
+    const tipEl = document.createElement('div');
+    tipEl.className = 'tb-tip';
+    function tip(ev, a, b) {
+      tipEl.replaceChildren(Object.assign(document.createElement('div'), { textContent: a }), Object.assign(document.createElement('div'), { textContent: b }));
+      el.append(tipEl);
+      const r = el.getBoundingClientRect();
+      const px = Math.min(ev.clientX - r.left + 10, r.width - tipEl.offsetWidth - 4);
+      tipEl.style.left = Math.max(0, px) + 'px';
+      tipEl.style.top = (ev.clientY - r.top + 10) + 'px';
+    }
+  });
+</script>
+
+<script>
+  dash.draw('strip', (el) => {
+    el.replaceChildren();
+    const pil = tbRows('pilotos');
+    const s = tbSessao();
+    if (!pil || !s) { el.textContent = '—'; return; }
+    const rows = pil.filter((r) => r.sessao_id === s.sessao_id);
+    if (!rows.length) { el.textContent = '—'; return; }
+    const W = el.clientWidth || 500, H = 110, m = { l: 16, r: 16 };
+    const lo = d3.min(rows, (r) => r.melhor), hi = Math.min(d3.max(rows, (r) => r.melhor), lo * 1.1);
+    const x = d3.scaleLinear([lo, hi], [m.l, W - m.r]);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', 50).attr('y2', 50).attr('stroke', 'var(--cds-chart-axis)');
+    svg.append('line').attr('x1', x(s.mediana)).attr('x2', x(s.mediana)).attr('y1', 30).attr('y2', 70).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
+    const tipEl = document.createElement('div'); tipEl.className = 'tb-tip';
+    svg.append('g').selectAll('circle').data(rows.filter((r) => !r.eu)).join('circle').attr('cx', (r) => x(Math.min(r.melhor, hi))).attr('cy', (r, i) => 50 + ((i % 3) - 1) * 7).attr('r', 5)
+      .attr('fill', 'var(--cds-chart-muted)')
+      .on('mousemove', (ev, r) => { tipEl.textContent = `${r.pos}º ${r.piloto} · kart ${r.kart} · ${tbFmt(r.melhor)}`; el.append(tipEl); const b = el.getBoundingClientRect(); tipEl.style.left = Math.max(0, Math.min(ev.clientX - b.left + 8, b.width - tipEl.offsetWidth - 4)) + 'px'; tipEl.style.top = '0px'; })
+      .on('mouseleave', () => tipEl.remove());
+    rows.filter((r) => r.eu).forEach((r) => {
+      svg.append('circle').attr('cx', x(Math.min(r.melhor, hi))).attr('cy', 50).attr('r', 8).attr('fill', '#e0a800').attr('stroke', 'var(--color-fg)');
+      const px = x(Math.min(r.melhor, hi));
+      svg.append('text').attr('x', px).attr('y', 92).attr('text-anchor', px > W * 0.7 ? 'end' : px < W * 0.3 ? 'start' : 'middle')
+        .attr('fill', 'var(--color-fg)').attr('font-size', 12).text(`Rogério ${r.pos}º · ${tbFmt(r.melhor)}`);
+    });
+    svg.append('text').attr('x', m.l).attr('y', 18).attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(tbFmt(lo));
+    svg.append('text').attr('x', W - m.r).attr('y', 18).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(tbFmt(hi));
+  });
+
+  dash.draw('consist', (el) => {
+    el.replaceChildren();
+    const pil = tbRows('pilotos');
+    const s = tbSessao();
+    if (!pil || !s) { el.textContent = '—'; return; }
+    const rows = pil.filter((r) => r.sessao_id === s.sessao_id && r.consistencia != null);
+    if (rows.length < 2) { el.textContent = '—'; return; }
+    const W = el.clientWidth || 500, H = 280, m = { t: 10, r: 40, b: 34, l: 58 };
+    const x = d3.scaleLinear(d3.extent(rows, (r) => r.melhor), [m.l, W - m.r]).nice();
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.consistencia)], [H - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(5).tickFormat(tbFmt))
+      .attr('font-size', null).attr('font-family', null).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--cds-chart-axis)'));
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((d) => tbDec(d, 2) + ' s'))
+      .attr('font-size', null).attr('font-family', null).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--cds-chart-axis)'));
+    const tipEl = document.createElement('div'); tipEl.className = 'tb-tip';
+    svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(r.melhor)).attr('cy', (r) => y(r.consistencia))
+      .attr('r', (r) => r.eu ? 8 : 5).attr('fill', (r) => r.eu ? '#e0a800' : 'var(--cds-chart-muted)').attr('stroke', (r) => r.eu ? 'var(--color-fg)' : 'none')
+      .on('mousemove', (ev, r) => { tipEl.textContent = `${r.piloto} · kart ${r.kart} · melhor ${tbFmt(r.melhor)} · desvio ${tbDec(r.consistencia, 3)} s`; el.append(tipEl); const b = el.getBoundingClientRect(); tipEl.style.left = Math.max(0, Math.min(ev.clientX - b.left + 8, b.width - tipEl.offsetWidth - 4)) + 'px'; tipEl.style.top = (ev.clientY - b.top + 8) + 'px'; })
+      .on('mouseleave', () => tipEl.remove());
+  });
+</script>
+
+<script>
+  const linha = (r, cols) => {
+    const tr = document.createElement('tr');
+    tr.dataset.key = tbKey(r.sessao_id, r.kart);
+    cols.forEach(([v, num]) => { const td = document.createElement('td'); td.textContent = v; if (num) td.className = 'tb-n'; tr.append(td); });
+    return tr;
+  };
+
+  dash.draw('classe', (tb) => {
+    tb.replaceChildren();
+    const pil = tbRows('pilotos');
+    const s = tbSessao();
+    if (!pil || !s) return;
+    const pick = new Set((dash.params().comparar || []).map(String));
+    pil.filter((r) => r.sessao_id === s.sessao_id).sort((a, b) => a.pos - b.pos).forEach((r) => {
+      const tr = linha(r, [[r.pos + 'º', 1], [String(r.kart), 1], [r.piloto], [tbFmt(r.melhor), 1], [r.pos === 1 ? '' : '+' + tbDec(r.gap_lider, 3), 1], [tbPct(r.vs_mediana), 1],
+        [tbFmt(r.media_boas), 1], [tbDec(r.consistencia, 3), 1], [String(r.voltas), 1], [r.pos_oficial ? r.pos_oficial + 'º' : '—', 1],
+        [r.pos_pdf ? r.pos_pdf + 'º' : '—', 1], [tbFmt(r.melhor_oficial), 1], [r.oficial_obs || '']]);
+      if (r.oficial_obs) tr.lastChild.style.color = 'var(--color-bad)';
+      if (r.eu) tr.className = 'tb-me';
+      else if (pick.has(String(r.kart))) tr.className = 'tb-pick';
+      tr.onclick = () => {
+        if (r.eu) return;
+        const cur = new Set((dash.params().comparar || []).map(String));
+        cur.has(String(r.kart)) ? cur.delete(String(r.kart)) : cur.add(String(r.kart));
+        dash.setParams({ comparar: [...cur] });
+      };
+      tb.append(tr);
+    });
+  });
+
+  dash.draw('minhas', (tb) => {
+    tb.replaceChildren();
+    const pil = tbRows('pilotos');
+    if (!pil) return;
+    pil.filter((r) => r.eu).forEach((r) => {
+      const tr = linha(r, [[r.dia], [r.hora], [r.tracado], [r.condicao], [String(r.kart), 1], [tbFmt(r.melhor), 1], [r.pos + 'º', 1], [String(r.de), 1],
+        [r.pos === 1 ? '' : '+' + tbDec(r.gap_lider, 3), 1], [tbPct(r.vs_mediana), 1], [tbDec(r.consistencia, 3), 1], [r.pos_oficial ? r.pos_oficial + 'º' : '—', 1]]);
+      tr.onclick = () => dash.setParams({ tracado: null, sessao: r.sessao_id, comparar: [] });
+      tb.append(tr);
+    });
+  });
+
+  dash.draw('todas', (tb) => {
+    tb.replaceChildren();
+    const vol = tbRows('voltas');
+    const s = tbSessao();
+    if (!vol || !s) return;
+    vol.filter((v) => v.sessao_id === s.sessao_id).sort((a, b) => (b.eu - a.eu) || a.kart - b.kart || a.volta - b.volta).forEach((v) => {
+      const tr = document.createElement('tr');
+      tr.dataset.key = tbKey(v.sessao_id, v.kart) + ',' + v.volta;
+      [[String(v.kart), 1], [v.eu ? 'Rogério Bevilacqua' : v.piloto], [String(v.volta), 1], [tbFmt(v.tempo), 1], [v.fonte], [v.status]].forEach(([t, num]) => {
+        const td = document.createElement('td'); td.textContent = t; if (num) td.className = 'tb-n'; tr.append(td);
+      });
+      if (v.status !== 'Válida') tr.className = 'tb-off';
+      else if (v.eu) tr.className = 'tb-me';
+      tb.append(tr);
+    });
+  });
+</script>
+
+</div>
+<script>
+['sessoes', 'pilotos', 'voltas'].forEach((id) =>
+  fetch(id + '.json').then((r) => r.json()).then((rows) => dash._carrega(id, rows)).catch((e) => console.error(id, e)));
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 """Publica uma página HTML estática no GitHub Pages, que abre sem conta no Claude.
 
-Uso: python publicar.py <arquivo.html> <slug>
+Uso: python publicar.py <arquivo.html | pasta com index.html> <slug>
 Sai em https://pietroaugustorabaioli-hash.github.io/paginas/<slug>/
 Tudo nesta pasta é PÚBLICO (repo público). A página precisa trazer os dados dentro do HTML.
 Nasceu em 29/10/2026 (ele: "criar páginas para que não tenha um troço instalado, conseguir abrir").
@@ -38,7 +38,10 @@ def main():
     origem, slug = Path(sys.argv[1]), sys.argv[2].strip("/")
     destino = AQUI / slug / "index.html"
     destino.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(origem, destino)
+    if origem.is_dir():  # pasta com index.html + arquivos de dado ao lado
+        shutil.copytree(origem, destino.parent, dirs_exist_ok=True)
+    else:
+        shutil.copyfile(origem, destino)
     t = destino.read_text(encoding="utf-8")
     if 'name="robots"' not in t:
         alvo = "<title>" if "<title>" in t else "<head>"
