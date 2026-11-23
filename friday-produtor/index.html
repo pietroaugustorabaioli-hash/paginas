@@ -2,191 +2,468 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
 <title>A Friday do produtor</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Apresentação em uma coluna larga: tese, problema, mercado, a ideia em duas frentes, por que nós, os riscos e o próximo passo. Tema claro único. */
-:root{--bg:#fff;--fg:#17211a;--muted:#5d6b61;--line:#dde4de;--soft:#f3f6f3;--green:#2A7F02;--green-soft:#eef6e8;--ochre:#9a5b00;--ochre-soft:#fbf1df;
- --d:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;--b:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--m:"IBM Plex Mono",ui-monospace,Consolas,monospace;color-scheme:light}
+:root{--bg:#fff;--fg:#17211a;--muted:#5d6b61;--line:#dde4de;--soft:#f4f7f3;--green:#2A7F02;--green2:#3f9a14;--gsoft:#eef6e8;--ochre:#9a5b00;--osoft:#fbf1df;
+--d:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;--b:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--m:"IBM Plex Mono",ui-monospace,Consolas,monospace;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--b);font-size:16px;line-height:1.6;padding:32px max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
-.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
-h1,h2,h3{font-family:var(--d);margin:0;text-wrap:balance;letter-spacing:-.01em}
-h1{font-size:clamp(34px,5.2vw,58px);line-height:1.02;font-weight:700}
-h2{font-size:28px;font-weight:700}
-h3{font-size:19px;font-weight:600}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--fg);font-family:var(--b);font-size:16px;line-height:1.5;padding:0 16px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+section{padding:72px 0 8px}
+h1,h2,h3{font-family:var(--d);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(44px,7vw,84px);line-height:.95;font-weight:700}
+h2{font-size:clamp(32px,4.6vw,54px);line-height:1;font-weight:700}
+h3{font-size:20px;font-weight:600;line-height:1.15}
 p{margin:0}
-.eyebrow{font-family:var(--m);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.lead{font-size:20px;max-width:62ch;margin-top:14px}
-.meta{font-family:var(--m);font-size:13px;color:var(--muted);margin-top:16px}
-section{display:flex;flex-direction:column;gap:18px}
-.head{border-bottom:2px solid var(--fg);padding-bottom:8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;align-items:baseline}
-.head p{color:var(--muted);font-size:14px;max-width:60ch}
-blockquote{margin:0;border-left:4px solid var(--green);padding:6px 0 6px 18px;font-size:18px;font-style:italic;max-width:70ch}
-blockquote cite{display:block;font-style:normal;font-family:var(--m);font-size:12px;color:var(--muted);margin-top:6px}
-.lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.lista div{background:var(--soft);border-radius:6px;padding:12px 14px;font-size:15px}
-.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.num{border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.num b{font-family:var(--d);font-size:32px;line-height:1.1}
+.eyebrow{font-family:var(--m);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.big{font-size:clamp(19px,2.2vw,24px);color:var(--muted);margin-top:14px;max-width:34ch}
+.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.verde{color:var(--green)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:48px}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-family:var(--m);font-size:12px;padding:6px 10px;border-radius:999px;background:var(--gsoft);color:var(--green);display:inline-flex;align-items:center;gap:6px}
+.chip.o{background:var(--osoft);color:var(--ochre)}
+
+/* telefone */
+.phone{width:290px;max-width:100%;margin:0 auto;border:10px solid #e8ece8;outline:1px solid #cfd6d0;border-radius:38px;background:#fff;overflow:hidden;box-shadow:0 18px 40px rgba(23,33,26,.12);position:relative;font-size:13px;line-height:1.35}
+.phone .notch{height:22px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-family:var(--m);font-size:10px;color:var(--muted)}
+.exemplo{position:absolute;top:30px;right:10px;font-family:var(--m);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--osoft);color:var(--ochre);padding:2px 6px;border-radius:3px;z-index:2}
+/* whatsapp */
+.wa-top{background:var(--green);color:#fff;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.wa-top .av{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--green);font-family:var(--d);font-weight:700}
+.wa-top b{display:block;font-size:14px}
+.wa-top span{font-size:11px;opacity:.85}
+.wa-body{background:#efeae2;padding:12px 10px;display:flex;flex-direction:column;gap:8px;min-height:430px}
+.msg{max-width:84%;padding:7px 9px 6px;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.msg.eu{align-self:flex-end;background:#dcf8c6}
+.msg small{display:block;text-align:right;font-size:9.5px;color:#7a857c;margin-top:2px}
+.foto{width:180px;height:118px;border-radius:6px;background:linear-gradient(160deg,#cfe3b5,#9cbf73 55%,#c7b25e);display:grid;place-items:center;color:#35501f;font-family:var(--m);font-size:10px;text-align:center}
+.foto svg{display:block;margin:0 auto 4px}
+.audio{display:flex;align-items:center;gap:8px;min-width:170px}
+.audio .bar{flex:1;height:18px;background:repeating-linear-gradient(90deg,#7aa863 0 2px,transparent 2px 5px);border-radius:2px;opacity:.8}
+.salvo{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--green);margin-top:6px;font-size:12.5px}
+/* home do app */
+.app-top{padding:8px 16px 14px;background:var(--gsoft)}
+.app-top .ola{font-family:var(--d);font-size:20px;font-weight:700}
+.app-top .sub{color:var(--muted);font-size:12px}
+.clima{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:10px 12px;margin-top:12px;border:1px solid var(--line)}
+.clima b{font-family:var(--d);font-size:26px}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px}
+.mod{border:1px solid var(--line);border-radius:12px;padding:12px 6px 10px;text-align:center;font-size:11.5px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:6px}
+.mod svg{width:28px;height:28px}
+.offline{margin:0 14px;font-family:var(--m);font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.falar{margin:12px 14px 16px;background:var(--green);color:#fff;border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600}
+/* ferramenta preenchida */
+.tool-top{padding:8px 14px 12px;border-bottom:1px solid var(--line)}
+.tool-top .t{font-family:var(--d);font-size:19px;font-weight:700}
+.tool-top .s{color:var(--muted);font-size:12px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px 4px}
+.kpi{background:var(--soft);border-radius:10px;padding:8px 10px}
+.kpi b{display:block;font-family:var(--d);font-size:20px}
+.kpi span{font-size:10.5px;color:var(--muted)}
+.linhas{padding:8px 14px 14px;display:flex;flex-direction:column;gap:8px}
+.linha{border:1px solid var(--line);border-radius:10px;padding:9px 10px;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:12px}
+.linha .dt{font-family:var(--m);font-size:10.5px;color:var(--muted);grid-row:span 2}
+.linha.nova{border-color:var(--green);background:#f6fbf1}
+.selo{font-family:var(--m);font-size:9.5px;color:var(--green);display:flex;align-items:center;gap:4px}
+
+/* problema */
+.dores{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.dor{border:1px solid var(--line);border-radius:16px;padding:26px 20px 22px;display:flex;flex-direction:column;gap:16px;min-height:230px}
+.dor svg{width:84px;height:84px}
+.dor h3{font-size:24px}
+.fala{margin-top:28px;font-size:clamp(20px,2.4vw,27px);font-family:var(--d);font-weight:500;line-height:1.25;border-left:5px solid var(--green);padding-left:20px;max-width:30ch}
+.fala cite{display:block;font-family:var(--m);font-size:12px;font-style:normal;color:var(--muted);margin-top:8px;font-weight:400}
+
+/* mercado */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+.num{border-top:4px solid var(--green);padding-top:12px}
+.num b{display:block;font-family:var(--d);font-size:clamp(34px,4vw,48px);line-height:1}
 .num span{font-size:14px;color:var(--muted)}
-table{width:100%;border-collapse:collapse;font-size:15px;min-width:720px}
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
-th{font-family:var(--m);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;background:var(--soft);border-bottom:1px solid var(--line)}
-td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:0}
-td a{color:var(--fg);font-weight:600}
-.frentes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.frente{border:1px solid var(--line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.frente.ia{border-color:var(--green);background:#f8fbf5}
-.frente ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:15px}
-.tag{font-family:var(--m);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:3px;background:var(--ochre-soft);color:var(--ochre);align-self:flex-start}
-.frente.ia .tag{background:var(--green-soft);color:var(--green)}
-.fluxo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:f}
-.fluxo div{border-top:3px solid var(--green);padding-top:10px;font-size:15px}
-.fluxo b{display:block;font-family:var(--d);font-size:17px}
-.riscos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.risco{border-left:3px solid var(--ochre);padding:4px 0 4px 14px;font-size:15px}
-.risco b{display:block}
-.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.links a{display:block;border:1px solid var(--line);border-radius:8px;padding:16px;text-decoration:none;color:var(--fg)}
-.links a:hover{border-color:var(--green)}
-.links a b{display:block;font-family:var(--d);font-size:18px;margin-bottom:4px}
-.links a span{font-size:14px;color:var(--muted)}
-.cta{background:var(--fg);color:#fff;border-radius:10px;padding:28px}
-.cta h2{color:#fff}
-.cta p{color:#d9e2db;margin-top:8px;font-size:17px}
+.num.o{border-color:var(--ochre)}
+.destaque{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;border:2px solid var(--ochre);border-radius:20px;padding:28px 36px;background:#fffaf2;margin-bottom:22px}
+.destaque img{width:100%;max-width:280px;display:block;margin:0 auto;border-radius:14px}
+.destaque h3{font-size:clamp(30px,3.6vw,44px);line-height:1}
+.destaque .preco{font-family:var(--m);font-size:14px;color:var(--muted);margin-top:10px}
+.destaque .falta{font-family:var(--d);font-size:clamp(24px,2.8vw,34px);font-weight:600;color:var(--ochre);margin-top:20px;line-height:1.1}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.app{border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.app .tela{background:var(--soft);height:300px;display:grid;place-items:center;padding:14px}
+.app .tela img{max-height:272px;max-width:100%;border-radius:10px;display:block;box-shadow:0 6px 16px rgba(23,33,26,.12)}
+.app .info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+.app .info h3{font-size:19px}
+.app .preco{font-family:var(--m);font-size:12px;color:var(--muted)}
+.app .falta{font-size:14.5px;color:var(--ochre);font-weight:500;margin-top:6px;display:flex;gap:6px;align-items:flex-start}
+.app .falta svg{flex:none;margin-top:3px}
+.fonte{font-family:var(--m);font-size:11.5px;color:var(--muted);margin-top:14px}
+.fonte a{color:var(--muted)}
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.video{display:flex;flex-direction:column;gap:8px}
+.video .f{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video b{font-family:var(--d);font-size:17px}
+.video span{font-size:13px;color:var(--muted)}
+
+/* duas frentes */
+.frentes{display:grid;grid-template-columns:1fr 110px 1fr;gap:0;align-items:stretch}
+.frentes svg{width:100%;height:auto;display:block}
+.ponte{display:grid;place-items:center}
+.ponte svg{width:110px}
+.ponte .v{display:none}
+
+/* fluxo */
+.fluxo{display:grid;grid-template-columns:1fr 150px 1fr 150px 1fr;align-items:start;gap:0;margin-top:8px}
+.passo{display:flex;flex-direction:column;align-items:center;gap:18px}
+.passo .rot{display:flex;align-items:center;gap:10px;font-family:var(--d);font-size:22px;font-weight:600}
+.passo .rot i{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:16px}
+.seta{display:grid;place-items:center;align-self:center}
+.seta svg{width:120px}
+.seta .v{display:none}
+.frase{text-align:center;font-family:var(--d);font-size:clamp(24px,3vw,36px);font-weight:600;margin-top:40px;line-height:1.15}
+
+/* por que nós */
+.nos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.nos div{border-radius:16px;background:var(--gsoft);padding:28px 24px;display:flex;flex-direction:column;gap:14px}
+.nos svg{width:64px;height:64px}
+.nos h3{font-size:28px}
+.nos p{color:var(--muted);font-size:15.5px}
+.nos a{color:var(--green);font-weight:600}
+
+/* reunião */
+.reuniao{margin-top:72px;border:2px solid var(--green);background:#f6fbf1;border-radius:22px;padding:40px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+.cal{width:150px;border-radius:16px;overflow:hidden;border:1px solid #cfe0c4;background:#fff;text-align:center}
+.cal .mes{background:var(--green);color:#fff;font-family:var(--m);font-size:13px;letter-spacing:.1em;padding:8px 0}
+.cal .dia{font-family:var(--d);font-size:72px;font-weight:700;line-height:1;padding:10px 0 2px}
+.cal .sem{font-family:var(--m);font-size:13px;color:var(--muted);padding-bottom:12px}
+.reuniao h2{font-size:clamp(30px,4vw,48px)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.links a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--green);border-radius:999px;padding:10px 18px;color:var(--green);text-decoration:none;font-weight:600;background:#fff}
+.links a:hover{background:var(--gsoft)}
 a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
-@media (max-width:820px){.lista,.nums,.frentes,.fluxo,.riscos,.links{grid-template-columns:1fr}}
+
+@media (max-width:980px){
+ .hero{grid-template-columns:1fr}
+ .dores{grid-template-columns:repeat(2,1fr)}
+ .apps{grid-template-columns:repeat(2,1fr)}
+ .nums{grid-template-columns:repeat(2,1fr)}
+ .videos{grid-template-columns:1fr}
+ .frentes{grid-template-columns:1fr}
+ .ponte .h{display:none}.ponte .v{display:block;width:140px}
+ .fluxo{grid-template-columns:1fr}
+ .seta .h{display:none}.seta .v{display:block;width:60px;margin:10px 0}
+ .nos{grid-template-columns:1fr}
+ .destaque{grid-template-columns:1fr;padding:24px;gap:22px;text-align:center}
+}
+@media (max-width:560px){
+ section{padding-top:56px}
+ .dores{grid-template-columns:1fr}
+ .dor{min-height:0;flex-direction:row;align-items:center;padding:18px}
+ .dor svg{width:60px;height:60px;flex:none}
+ .dor h3{font-size:21px}
+ .apps{grid-template-columns:1fr 1fr;gap:10px}
+ .app .tela{height:220px;padding:10px}
+ .app .tela img{max-height:200px}
+ .app .info{padding:10px 10px 12px}
+ .app .info h3{font-size:16px}
+ .app .falta{font-size:13px}
+ .reuniao{grid-template-columns:1fr;padding:26px;justify-items:start}
+ .cal{width:120px}.cal .dia{font-size:56px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <div class="eyebrow">Manejo Blindado · proposta de produto · 23/11/2026</div>
-  <h1>A Friday do produtor</h1>
-  <p class="lead">Um app que faz pelo produtor rural o que a Friday já faz pelo Frost todo dia. Organiza a lavoura, faz a conta e responde na hora, pelo app ou pelo WhatsApp.</p>
-  <p class="meta">Para a reunião com o Marco · ideia gravada pelo Pietro em 23/11, pesquisa de mercado de 124 plataformas e o mapa do que a Friday faz hoje</p>
+<!-- 1. abertura -->
+<header class="hero">
+  <div>
+    <p class="eyebrow">Manejo Blindado · para o Marco · 23/11/2026</p>
+    <h1 style="margin-top:18px">A Friday<br>do <span class="verde">produtor</span></h1>
+    <p class="big">Um app que organiza a lavoura e conversa com ele pelo WhatsApp.</p>
+    <div class="chips">
+      <span class="chip">funciona sem internet</span>
+      <span class="chip">IA no app e no WhatsApp</span>
+      <span class="chip">salva tudo sozinha</span>
+    </div>
+  </div>
+  <!-- mockup b: tela inicial -->
+  <div class="phone" aria-label="Mockup da tela inicial do app, exemplo">
+    <span class="exemplo">exemplo</span>
+    <div class="notch" style="background:var(--gsoft)"><span>06:42</span><span>sem sinal</span></div>
+    <div class="app-top">
+      <div class="ola">Bom dia, seu João</div>
+      <div class="sub">Fazenda Exemplo · Soja 26/27 · dia 62</div>
+      <div class="clima"><div><b>31°</b><div class="sub">chuva às 16h, 12 mm</div></div>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#2A7F02" stroke-width="2.2" stroke-linecap="round"><path d="M12 28h17a7 7 0 0 0 0-14 10 10 0 0 0-19 3 5.5 5.5 0 0 0 2 11z"/><path d="M15 32l-2 4M22 32l-2 4M29 32l-2 4"/></svg></div>
+    </div>
+    <div class="mods">
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linecap="round"><circle cx="14" cy="14" r="11"/><path d="M14 7v14M17.5 10c-1-1.3-2.2-1.6-3.5-1.6-2 0-3.4 1-3.4 2.6 0 3.6 7 2 7 5.8 0 1.6-1.6 2.7-3.6 2.7-1.6 0-3-.6-3.9-1.9"/></svg>Custos</div>
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v4H4zM16 11h5l3 3M10 9V5h4"/><path d="M7 17v1M11 19v1M15 17v1M19 19v1M9 23v1M13 24v1M17 23v1"/></svg>Aplicações</div>
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 25c-6-3-9-8-9-13 4 0 7 1 9 4 2-3 5-4 9-4 0 5-3 10-9 13zM14 16v9"/><path d="M14 13c0-4 1-7 3-9"/></svg>Solo e folha</div>
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linejoin="round"><path d="M3 7l7-3 8 3 7-3v17l-7 3-8-3-7 3z"/><path d="M10 4v17M18 7v17"/></svg>Mapa</div>
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linecap="round"><circle cx="14" cy="14" r="5"/><path d="M14 3v3M14 22v3M3 14h3M22 14h3M6 6l2 2M20 20l2 2M6 22l2-2M20 8l2-2"/></svg>Clima</div>
+      <div class="mod"><svg viewBox="0 0 28 28" fill="none" stroke="#2A7F02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="20" height="18" rx="2"/><path d="M4 11h20M9 3v5M19 3v5M9 16h3M15 16h3M9 20h3"/></svg>Agenda</div>
+    </div>
+    <div class="offline"><svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#2A7F02"/></svg>tudo salvo no aparelho</div>
+    <div class="falar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.3A8 8 0 1 1 21 12z"/></svg>Falar com a Friday</div>
+  </div>
 </header>
 
+<!-- 2. problema -->
 <section>
-  <div class="head"><h2>O problema</h2><p>O produtor está no escuro.</p></div>
-  <blockquote>O cara está parado no tempo. Acontece um monte de coisa na lavoura dele, e ele está sempre no escuro, porque não tem contabilização, não tem ajuda. Tudo que é simples de fazer, uma análise de solo, uma análise de folha, ele precisa pedir ajuda para alguém.<cite>Pietro, 23/11/2026</cite></blockquote>
-  <div class="lista">
-    <div>Não sabe se está tendo lucro ou prejuízo.</div>
-    <div>Não sabe quanto custou cada aplicação.</div>
-    <div>Não tem registro de custo nem de lucro da lavoura.</div>
-    <div>Não tem contabilidade, mapa nem planejamento.</div>
-    <div>Precisa de alguém para ler uma análise de solo ou de folha.</div>
-    <div>Sabe que precisa de organização, mas isso dá trabalho e pede um escritório.</div>
+  <div class="sec-head">
+    <p class="eyebrow">O problema</p>
+    <h2>O produtor está no escuro.</h2>
   </div>
+  <div class="dores">
+    <div class="dor">
+      <svg viewBox="0 0 84 84" fill="none" stroke="#9a5b00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="34" cy="58" rx="22" ry="8"/><path d="M12 58v8c0 4.4 9.8 8 22 8s22-3.6 22-8v-8"/><path d="M12 46c0 4.4 9.8 8 22 8s22-3.6 22-8-9.8-8-22-8-22 3.6-22 8z"/><path d="M62 10c6 0 10 3.6 10 8 0 6-8 6-8 12M64 38v1"/></svg>
+      <h3>Lucro ou prejuízo? Não sabe.</h3>
+    </div>
+    <div class="dor">
+      <svg viewBox="0 0 84 84" fill="none" stroke="#9a5b00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 30h34v12H10zM44 36h14l8 8M26 30V18h12"/><path d="M18 52v3M28 58v3M38 52v3M48 58v3M23 66v3M33 70v3M43 66v3"/><path d="M66 14c5 0 8 3 8 6.5 0 5-6.5 5-6.5 10M67.5 36v1"/></svg>
+      <h3>Quanto custou a aplicação? Não sabe.</h3>
+    </div>
+    <div class="dor">
+      <svg viewBox="0 0 84 84" fill="none" stroke="#9a5b00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h30l12 12v54H18z"/><path d="M48 8v12h12M26 34h26M26 44h26M26 54h16"/><circle cx="62" cy="62" r="10"/><path d="M69 69l9 9"/></svg>
+      <h3>Laudo de solo e de folha? Pede ajuda.</h3>
+    </div>
+    <div class="dor">
+      <svg viewBox="0 0 84 84" fill="none" stroke="#9a5b00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22l20-8 24 8 20-8v48l-20 8-24-8-20 8z" stroke-dasharray="6 6"/><path d="M28 14v48M52 22v48"/><path d="M34 36l12 12M46 36L34 48"/></svg>
+      <h3>Sem mapa, sem plano, sem registro.</h3>
+    </div>
+  </div>
+  <blockquote class="fala" style="margin-left:0">Acontece um monte de coisa na lavoura dele, e ele está sempre no escuro.<cite>Pietro, 23/11/2026</cite></blockquote>
 </section>
 
+<!-- 3. mercado -->
 <section>
-  <div class="head"><h2>O mercado está fraco</h2><p>124 plataformas mapeadas no Brasil, fora e em mercados vizinhos.</p></div>
+  <div class="sec-head">
+    <p class="eyebrow">O mercado · 124 plataformas olhadas</p>
+    <h2>Todo mundo fez um chat.<br><span style="color:var(--muted)">Ninguém fez tudo, bem feito.</span></h2>
+  </div>
+
   <div class="nums">
-    <div class="num"><b>R$ 30 a 60</b><span>o que cobra quase todo chat de IA para o agro, por mês</span></div>
-    <div class="num"><b>grátis</b><span>JoIA (CNA), RAImundo (Embrapa), Bayer, John Deere: quem vende insumo dá a IA</span></div>
-    <div class="num"><b>~2.000</b><span>a maior base pagante achada (Floss), com o especialista respondendo</span></div>
-    <div class="num"><b>45%</b><span>dos cancelamentos do Aegro: o produtor parou de lançar os dados</span></div>
+    <div class="num"><b>R$ 30 a 60</b><span>o chat de IA do agro, por mês</span></div>
+    <div class="num"><b>grátis</b><span>a IA de quem vende insumo (CNA, Embrapa, Bayer)</span></div>
+    <div class="num o"><b>45%</b><span>dos cancelamentos do Aegro vêm de parar de lançar dados</span></div>
+    <div class="num"><b>~2.000</b><span>a maior base pagante achada (Floss)</span></div>
   </div>
-  <p style="max-width:75ch">Quase tudo é a mesma coisa. Alguém escreveu um prompt, fez o app e lançou. O maior em IA é o JÃO iAGRO, e ele é só um chat no WhatsApp. Ninguém juntou num lugar só, bem feito, tudo de que o produtor precisa.</p>
-  <div class="tbl"><table>
-    <thead><tr><th>Quem</th><th>O que é</th><th>Preço</th><th>O que falta</th></tr></thead>
-    <tbody>
-      <tr><td><a href="https://jaoiagro.com/" target="_blank" rel="noopener">JÃO iAGRO</a></td><td>Chat de IA no WhatsApp, contas e foto de praga</td><td>R$ 59,90/mês (anual)</td><td>É só o chat; não tem as ferramentas nem método</td></tr>
-      <tr><td><a href="https://planteio.com.br/" target="_blank" rel="noopener">Planteio</a></td><td>Caderno de campo no WhatsApp, recado diário</td><td>R$ 19,90 a 39,90/mês</td><td>Registro e aviso, sem análise nem agronomia</td></tr>
-      <tr><td><a href="https://aegro.com.br/produtos/" target="_blank" rel="noopener">Aegro</a></td><td>Gestão completa da fazenda + IA no WhatsApp</td><td>sob consulta</td><td>Pesado de alimentar; quase metade cancela por isso</td></tr>
-      <tr><td><a href="https://www.agronomos.ia.br/precos" target="_blank" rel="noopener">agrônomo10X</a></td><td>IA que responde pelo conteúdo de uma comunidade</td><td>R$ 49,90 a 549,90/mês</td><td>Foco em agrônomo e geotecnologia, não no produtor</td></tr>
-      <tr><td><a href="https://assinatura.grupofloss.com/" target="_blank" rel="noopener">Floss</a></td><td>Assinatura de especialista, responde no WhatsApp</td><td>R$ 129 a 260/mês</td><td>Gente, sem ferramenta</td></tr>
-    </tbody>
-  </table></div>
+
+  <div class="destaque">
+    <img src="img/jao.webp" alt="Tela do JÃO iAGRO no celular, uma caixa de pergunta no WhatsApp" loading="lazy">
+    <div>
+      <p class="eyebrow">O maior em IA para o produtor</p>
+      <h3 style="margin-top:10px">JÃO iAGRO</h3>
+      <p class="preco">R$ 59,90/mês no plano anual · mais de 10 mil já usaram</p>
+      <p class="falta">É só um chat no WhatsApp.</p>
+      <p style="color:var(--muted);margin-top:8px">Sem as ferramentas e sem método por trás.</p>
+    </div>
+  </div>
+
+  <div class="apps">
+    <div class="app"><div class="tela"><img src="img/planteio.webp" alt="Aviso do Planteio no WhatsApp sobre a fase do milho" loading="lazy"></div>
+      <div class="info"><h3>Planteio</h3><p class="preco">R$ 19,90 a 39,90/mês</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Registra e avisa. Não analisa.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/aegro.webp" alt="App Aegro Campo, registro de atividades de campo" loading="lazy"></div>
+      <div class="info"><h3>Aegro</h3><p class="preco">sob consulta</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Pesado de alimentar. Quase metade cancela por isso.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/lida.webp" alt="App Lida, tela inicial com clima e custos" loading="lazy"></div>
+      <div class="info"><h3>Lida</h3><p class="preco">grátis a R$ 99/mês</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Só iPhone. Não recomenda produto nem dose.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/nagro.webp" alt="App NAgro, tela de conteúdo" loading="lazy"></div>
+      <div class="info"><h3>NAgro</h3><p class="preco">R$ 60 a 77/mês no anual</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Aula e comunidade. A IA é um extra.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/fieldview.webp" alt="App Climate FieldView, mapa de plantio do talhão" loading="lazy"></div>
+      <div class="info"><h3>Bayer FieldView</h3><p class="preco">grátis para quem compra a semente</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Feito para vender o insumo da Bayer.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/farmbox.webp" alt="App Farmbox, mapa da fazenda" loading="lazy"></div>
+      <div class="info"><h3>Farmbox</h3><p class="preco">sob consulta, por hectare</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Monitoramento e registro. Ninguém conversa com ele.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/cropwise.webp" alt="App Cropwise Protector, da Syngenta" loading="lazy"></div>
+      <div class="info"><h3>Cropwise (Syngenta)</h3><p class="preco">sob consulta</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Plataforma de fabricante, para fazenda grande.</p></div></div>
+    <div class="app"><div class="tela"><img src="img/lida-praga.webp" alt="App Lida, diagnóstico de praga por foto" loading="lazy"></div>
+      <div class="info"><h3>Foto da praga</h3><p class="preco">Lida, JÃO, Planteio, JoIA</p><p class="falta"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#9a5b00" stroke-width="2"/></svg>Responde e esquece. Nada vira registro.</p></div></div>
+  </div>
+  <p class="fonte">Telas tiradas da Google Play e do material de cada empresa em 23/11/2026. Preços em <a href="mercado/">mercado/</a>.</p>
+
+  <div class="videos">
+    <div class="video"><div class="f"><iframe src="https://www.youtube-nocookie.com/embed/natjdP3IcKM" title="Apresentação do JÃO iAGRO" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><b>JÃO iAGRO</b><span>apresentação oficial, 1 min</span></div>
+    <div class="video"><div class="f"><iframe src="https://www.youtube-nocookie.com/embed/SQNJsNah1y4" title="Aegrozap, a gestão da fazenda pelo WhatsApp" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><b>Aegrozap</b><span>áudio no WhatsApp vira ficha no Aegro, 1 min</span></div>
+    <div class="video"><div class="f"><iframe src="https://www.youtube-nocookie.com/embed/Zgw0T9OUWw8" title="JoIA, inteligência que nasce no campo" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><b>JoIA (CNA/Senar)</b><span>o chat grátis, 1 min</span></div>
+  </div>
 </section>
 
+<!-- 4. a ideia, duas frentes -->
 <section>
-  <div class="head"><h2>A ideia</h2><p>Usar a fórmula que já funcionou dentro de casa.</p></div>
-  <p style="max-width:75ch">O Frost montou a Friday para ajudar ele, e a equipe usa ela direto, com recomendação de aplicação, calagem e gessagem, tratamento de semente, leitura de laudo, caderno de campo na visita, agenda e tarefas. A ideia é pegar a mesma fórmula e transformar num produto para o produtor: como se ele pagasse por mês uma assistente que entende de lavoura.</p>
+  <div class="sec-head">
+    <p class="eyebrow">A ideia</p>
+    <h2>Duas frentes, um app só.</h2>
+  </div>
   <div class="frentes">
-    <div class="frente">
-      <span class="tag">Frente 1 · ferramentas, sem internet e sem IA</span>
-      <h3>O app que funciona no meio da roça</h3>
-      <p style="font-size:15px">A IA tem custo para manter. A grande sacada é ter muitas ferramentas que ajudam sem IA nenhuma e rodam sem sinal.</p>
-      <ul>
-        <li>Análise de solo e de folha</li>
-        <li>Contas a pagar e a receber</li>
-        <li>Estoque e balanço de custos da safra</li>
-        <li>Relatórios de monitoramento, de aplicação e de planejamento</li>
-        <li>Mapa da fazenda, e tudo o que o Hub já faz</li>
-        <li>Clima, cotação e notícia relevante</li>
-        <li>Agenda, linha do tempo da safra e planejamento</li>
-      </ul>
+    <svg viewBox="0 0 500 470" role="img" aria-label="Frente 1, ferramentas que rodam sem internet e sem IA">
+      <rect x="2" y="2" width="496" height="466" rx="22" fill="#fff" stroke="#dde4de" stroke-width="2"/>
+      <text x="30" y="46" font-family="IBM Plex Mono" font-size="14" fill="#9a5b00" letter-spacing="1">FRENTE 1</text>
+      <text x="30" y="84" font-family="IBM Plex Sans Condensed" font-weight="700" font-size="32" fill="#17211a">Ferramentas</text>
+      <text x="30" y="114" font-family="IBM Plex Sans" font-size="18" fill="#5d6b61">sem internet e sem IA</text>
+      <!-- sinal cortado -->
+      <g transform="translate(410 40)" fill="none" stroke="#9a5b00" stroke-width="3" stroke-linecap="round"><path d="M6 46V36M18 46V26M30 46V16M42 46V6"/><path d="M0 4l50 46"/></g>
+      <g font-family="IBM Plex Sans" font-size="16" fill="#17211a">
+        <g transform="translate(30 150)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M67 18c-8 4-12 10-12 17 6 0 10-2 12-6 2 4 6 6 12 6 0-7-4-13-12-17z M67 29v16" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linecap="round"/><text x="67" y="72" text-anchor="middle">Solo e folha</text></g>
+        <g transform="translate(182 150)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><circle cx="67" cy="32" r="14" fill="none" stroke="#2A7F02" stroke-width="2.4"/><path d="M67 24v16M71 27c-1-1-2-1.5-4-1.5s-4 1-4 2.5c0 4 8 2 8 6 0 1.6-2 2.5-4 2.5s-3-.5-4-1.5" fill="none" stroke="#2A7F02" stroke-width="2"/><text x="67" y="72" text-anchor="middle">Contas</text></g>
+        <g transform="translate(334 150)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M50 20h34v26H50zM50 30h34M62 20v10M72 20v10" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linejoin="round"/><text x="67" y="72" text-anchor="middle">Estoque</text></g>
+        <g transform="translate(30 252)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M50 46V34M60 46V24M70 46V30M80 46V18" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/><text x="67" y="72" text-anchor="middle">Custo da safra</text></g>
+        <g transform="translate(182 252)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M52 16h24l8 8v24H52zM58 30h20M58 38h14" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linejoin="round"/><text x="67" y="72" text-anchor="middle">Relatórios</text></g>
+        <g transform="translate(334 252)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M46 22l10-4 12 4 10-4v26l-10 4-12-4-10 4z M56 18v26M68 22v26" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linejoin="round"/><text x="67" y="72" text-anchor="middle">Mapa</text></g>
+        <g transform="translate(30 354)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M54 40h22a7 7 0 0 0 0-14 10 10 0 0 0-19 2 6 6 0 0 0-3 12z" fill="none" stroke="#2A7F02" stroke-width="2.4"/><text x="67" y="72" text-anchor="middle">Clima</text></g>
+        <g transform="translate(182 354)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><path d="M48 44l10-10 8 6 16-18M74 22h8v8" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="67" y="72" text-anchor="middle">Cotação</text></g>
+        <g transform="translate(334 354)"><rect width="135" height="86" rx="14" fill="#f4f7f3"/><rect x="51" y="18" width="32" height="28" rx="3" fill="none" stroke="#2A7F02" stroke-width="2.4"/><path d="M51 26h32M59 14v8M75 14v8" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linecap="round"/><text x="67" y="72" text-anchor="middle">Agenda</text></g>
+      </g>
+    </svg>
+
+    <div class="ponte">
+      <svg class="h" viewBox="0 0 110 200" aria-hidden="true"><path d="M100 100H14" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/><path d="M24 88L10 100l14 12" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="55" y="80" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" fill="#2A7F02">salva</text><text x="55" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" fill="#2A7F02">aqui</text></svg>
+      <svg class="v" viewBox="0 0 140 90" aria-hidden="true"><path d="M45 80V12" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/><path d="M33 22L45 8l12 14" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="60" y="54" font-family="IBM Plex Mono" font-size="13" fill="#2A7F02">salva</text></svg>
     </div>
-    <div class="frente ia">
-      <span class="tag">Frente 2 · a IA, no app e no WhatsApp</span>
-      <h3>A Friday dele</h3>
-      <p style="font-size:15px">O produtor conversa como a gente conversa com a Friday, mandando foto, áudio e pergunta. Ela responde, gera o que precisa e salva tudo nas ferramentas.</p>
-      <ul>
-        <li>Recomendação de aplicação, conferida contra o registro do produto</li>
-        <li>Calagem, gessagem, tratamento de semente, relação de insumos</li>
-        <li>Leitura de laudo de solo e de folha, por talhão</li>
-        <li>Caderno de campo: o que ele manda vira registro</li>
-        <li>Plano de plantio, briefing do dia, agenda e tarefas</li>
-        <li>Treinada no que o Manejo Blindado quer que ela seja</li>
-      </ul>
-    </div>
+
+    <svg viewBox="0 0 500 470" role="img" aria-label="Frente 2, a IA no app e no WhatsApp">
+      <rect x="2" y="2" width="496" height="466" rx="22" fill="#f6fbf1" stroke="#2A7F02" stroke-width="2"/>
+      <text x="30" y="46" font-family="IBM Plex Mono" font-size="14" fill="#2A7F02" letter-spacing="1">FRENTE 2</text>
+      <text x="30" y="84" font-family="IBM Plex Sans Condensed" font-weight="700" font-size="32" fill="#17211a">A Friday dele</text>
+      <text x="30" y="114" font-family="IBM Plex Sans" font-size="18" fill="#5d6b61">a IA, no app e no WhatsApp</text>
+      <!-- entradas -->
+      <g font-family="IBM Plex Sans" font-size="16" fill="#17211a">
+        <g transform="translate(30 160)"><rect width="120" height="64" rx="14" fill="#fff" stroke="#cfe0c4"/><rect x="16" y="20" width="30" height="22" rx="4" fill="none" stroke="#2A7F02" stroke-width="2.4"/><circle cx="31" cy="31" r="6" fill="none" stroke="#2A7F02" stroke-width="2.4"/><text x="58" y="38">foto</text></g>
+        <g transform="translate(30 240)"><rect width="120" height="64" rx="14" fill="#fff" stroke="#cfe0c4"/><rect x="24" y="16" width="12" height="20" rx="6" fill="none" stroke="#2A7F02" stroke-width="2.4"/><path d="M18 30a12 12 0 0 0 24 0M30 42v6" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linecap="round"/><text x="58" y="38">áudio</text></g>
+        <g transform="translate(30 320)"><rect width="120" height="64" rx="14" fill="#fff" stroke="#cfe0c4"/><path d="M18 18h28v18H28l-8 7v-7h-2z" fill="none" stroke="#2A7F02" stroke-width="2.4" stroke-linejoin="round"/><text x="56" y="38">pergunta</text></g>
+      </g>
+      <path d="M156 192C200 192 200 272 236 272M156 272H236M156 352C200 352 200 272 236 272" fill="none" stroke="#2A7F02" stroke-width="3"/>
+      <!-- cérebro / IA -->
+      <circle cx="292" cy="272" r="56" fill="#2A7F02"/>
+      <text x="292" y="266" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-weight="700" font-size="22" fill="#fff">Friday</text>
+      <text x="292" y="290" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#e2f2d6">lê e calcula</text>
+      <path d="M348 272H380" stroke="#2A7F02" stroke-width="3"/><path d="M374 264l10 8-10 8" fill="none" stroke="#2A7F02" stroke-width="3" stroke-linejoin="round"/>
+      <g font-family="IBM Plex Sans" font-size="15" fill="#17211a">
+        <rect x="388" y="196" width="92" height="64" rx="12" fill="#fff" stroke="#cfe0c4"/><text x="434" y="224" text-anchor="middle">responde</text><text x="434" y="244" text-anchor="middle" fill="#5d6b61" font-size="13">o que fazer</text>
+        <rect x="388" y="284" width="92" height="64" rx="12" fill="#fff" stroke="#2A7F02" stroke-width="2"/><text x="434" y="312" text-anchor="middle" font-weight="600" fill="#2A7F02">salva</text><text x="434" y="332" text-anchor="middle" fill="#5d6b61" font-size="13">na ferramenta</text>
+      </g>
+      <text x="30" y="436" font-family="IBM Plex Sans" font-size="15" fill="#5d6b61">Treinada no método do Manejo Blindado.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 5. o fluxo, nos mockups -->
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Como ele usa</p>
+    <h2>Ele fala. A Friday anota.</h2>
   </div>
   <div class="fluxo">
-    <div><b>Fala</b>Ele manda foto ou áudio pelo WhatsApp ou pelo app.</div>
-    <div><b>A IA faz</b>Lê, calcula e responde com o que fazer.</div>
-    <div><b>Salva</b>Custo, aplicação, laudo e visita entram na ferramenta certa.</div>
-    <div><b>Acompanha</b>Ele abre o app e vê a safra inteira, sem ter digitado nada.</div>
+    <!-- mockup a: WhatsApp -->
+    <div class="passo">
+      <div class="rot"><i>1</i>Manda a foto</div>
+      <div class="phone" aria-label="Mockup de conversa no WhatsApp, exemplo">
+        <span class="exemplo">exemplo</span>
+        <div class="notch" style="background:var(--green);color:#e8f4df"><span>14:08</span><span>4G</span></div>
+        <div class="wa-top"><div class="av">F</div><div><b>Friday do produtor</b><span>online</span></div></div>
+        <div class="wa-body">
+          <div class="msg eu"><div class="foto"><div><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#35501f" stroke-width="2"><rect x="2" y="5" width="22" height="17" rx="3"/><circle cx="13" cy="13.5" r="4.5"/><path d="M9 5l2-3h4l2 3"/></svg>foto da folha<br>talhão 3</div></div><small>14:06</small></div>
+          <div class="msg eu"><div class="audio"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z" fill="#3f7a2a"/></svg><div class="bar"></div><span style="font-size:11px;color:#5d6b61">0:12</span></div><small>14:06</small></div>
+          <div class="msg">Amarelado na borda das folhas de baixo. Bate com falta de potássio, e o laudo do talhão 3 já mostrava K baixo.
+            <div class="salvo"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#2A7F02"/><path d="M4 7.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>Salvei no caderno da safra</div><small>14:07</small></div>
+          <div class="msg">Monto a recomendação para o seu agrônomo assinar?<small>14:07</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seta">
+      <svg class="h" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30h100" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/><path d="M96 18l14 12-14 12" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="v" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 4v44" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/><path d="M18 38l12 14 12-14" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- mockup c: ferramenta preenchida -->
+    <div class="passo">
+      <div class="rot"><i>2</i>Vira registro</div>
+      <div class="phone" aria-label="Mockup do caderno da safra preenchido pela conversa, exemplo">
+        <span class="exemplo">exemplo</span>
+        <div class="notch"><span>14:08</span><span>sem sinal</span></div>
+        <div class="tool-top"><div class="t">Caderno da safra</div><div class="s">Talhão 3 · soja · 48 ha</div></div>
+        <div class="kpis">
+          <div class="kpi"><b>R$ 2.140</b><span>custo por ha até hoje</span></div>
+          <div class="kpi"><b>4</b><span>aplicações feitas</span></div>
+        </div>
+        <div class="linhas">
+          <div class="linha nova"><span class="dt">23/11</span><b>Folha com falta de K</b><span class="selo"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#2A7F02"/></svg>veio do WhatsApp, com a foto</span></div>
+          <div class="linha"><span class="dt">18/11</span><b>Fungicida</b><span style="color:var(--muted)">R$ 182/ha · 48 ha</span></div>
+          <div class="linha"><span class="dt">09/11</span><b>Monitoramento</b><span style="color:var(--muted)">percevejo abaixo do nível</span></div>
+          <div class="linha"><span class="dt">28/10</span><b>Laudo de solo</b><span style="color:var(--muted)">K baixo, calagem feita</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seta">
+      <svg class="h" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30h100" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/><path d="M96 18l14 12-14 12" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="v" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 4v44" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/><path d="M18 38l12 14 12-14" fill="none" stroke="#2A7F02" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- acompanha -->
+    <div class="passo">
+      <div class="rot"><i>3</i>Ele acompanha</div>
+      <svg viewBox="0 0 300 380" style="width:290px;max-width:100%" role="img" aria-label="Desenho do produtor vendo a safra inteira no app">
+        <rect x="1" y="1" width="298" height="378" rx="24" fill="#f4f7f3" stroke="#dde4de"/>
+        <text x="150" y="44" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-weight="700" font-size="22" fill="#17211a">A safra inteira</text>
+        <text x="150" y="68" text-anchor="middle" font-family="IBM Plex Sans" font-size="14" fill="#5d6b61">sem ter digitado nada</text>
+        <!-- linha do tempo -->
+        <path d="M40 120H260" stroke="#2A7F02" stroke-width="4" stroke-linecap="round"/>
+        <g fill="#fff" stroke="#2A7F02" stroke-width="3"><circle cx="50" cy="120" r="9"/><circle cx="110" cy="120" r="9"/><circle cx="170" cy="120" r="9"/></g><circle cx="230" cy="120" r="11" fill="#2A7F02"/>
+        <g font-family="IBM Plex Mono" font-size="11" fill="#5d6b61" text-anchor="middle"><text x="50" y="150">plantio</text><text x="110" y="150">laudo</text><text x="170" y="150">aplicação</text><text x="230" y="150" fill="#2A7F02">hoje</text></g>
+        <!-- barras de custo -->
+        <text x="40" y="196" font-family="IBM Plex Sans" font-size="13" fill="#5d6b61">custo por mês</text>
+        <g fill="#2A7F02"><rect x="40" y="262" width="34" height="48" rx="4" opacity=".45"/><rect x="88" y="232" width="34" height="78" rx="4" opacity=".6"/><rect x="136" y="244" width="34" height="66" rx="4" opacity=".75"/><rect x="184" y="214" width="34" height="96" rx="4"/></g>
+        <path d="M40 312H260" stroke="#cfd6d0"/>
+        <g font-family="IBM Plex Mono" font-size="11" fill="#5d6b61" text-anchor="middle"><text x="57" y="332">ago</text><text x="105" y="332">set</text><text x="153" y="332">out</text><text x="201" y="332">nov</text></g>
+        <text x="150" y="364" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#9a5b00">desenho da ideia</text>
+      </svg>
+    </div>
   </div>
-  <p style="max-width:75ch;color:var(--muted);font-size:15px">Isso ataca de frente o motivo nº 1 de cancelamento do setor. O produtor não precisa alimentar o sistema, porque a IA alimenta por ele.</p>
+  <p class="frase">O produtor não alimenta o sistema.<br><span class="verde">A IA alimenta por ele.</span></p>
 </section>
 
+<!-- 6. por que nós -->
 <section>
-  <div class="head"><h2>Cérebro coletivo</h2><p>Sem invadir a vida de ninguém.</p></div>
-  <p style="max-width:75ch">Não é para ter a agenda do produtor. É saber o que a base está perguntando, como o que aplicar na soja agora e onde a lavoura está travando. Isso vira um dado que ninguém mais no mercado tem, e volta como conteúdo e como produto.</p>
-</section>
-
-<section>
-  <div class="head"><h2>Por que nós</h2></div>
-  <div class="lista">
-    <div><b>Temos base.</b> Quem lança app de agro tem a ideia e não tem público.</div>
-    <div><b>Temos nome e respeito.</b> O produtor confia no Aminter e no método.</div>
-    <div><b>Já usamos.</b> A Friday roda todo dia na equipe; não é teoria.</div>
+  <div class="sec-head">
+    <p class="eyebrow">Por que nós</p>
+    <h2>Eles têm a ideia. Nós temos o resto.</h2>
   </div>
-  <p style="max-width:75ch">E o produtor migra para o que tem mais tecnologia quando aparece. Quem chegar primeiro com algo bem feito, que ele vai sentir falta, fica.</p>
-</section>
-
-<section>
-  <div class="head"><h2>O que a pesquisa pede para cuidar</h2></div>
-  <div class="riscos">
-    <div class="risco"><b>Custo de IA por assinante</b>Planos com IA pesada gastam de US$ 15 a 30 por usuário ativo por mês (dado de fornecedor). Por isso a frente offline vem primeiro.</div>
-    <div class="risco"><b>Receita agronômica</b>Defensivo só se vende com receita de agrônomo (Lei 14.785/2023). A IA dá método e conta; a receita para a área dele é de um agrônomo.</div>
-    <div class="risco"><b>O grátis está chegando</b>CNA, Embrapa, Bayer e John Deere dão IA de graça. Chat genérico não se vende; ferramenta junto com método se vende.</div>
-    <div class="risco"><b>Preço</b>Chat sozinho vale R$ 30 a 60. Acima de R$ 200, todo concorrente tem gente respondendo ou a fazenda inteira no sistema.</div>
+  <div class="nos">
+    <div>
+      <svg viewBox="0 0 64 64" fill="none" stroke="#2A7F02" stroke-width="3" stroke-linecap="round"><circle cx="22" cy="20" r="8"/><circle cx="44" cy="22" r="7"/><path d="M6 50c0-9 7-16 16-16s16 7 16 16M36 36c2-1 5-2 8-2 8 0 14 6 14 14"/></svg>
+      <h3>Temos base.</h3><p>Quem lança app de agro tem a ideia e não tem público.</p>
+    </div>
+    <div>
+      <svg viewBox="0 0 64 64" fill="none" stroke="#2A7F02" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l20 8v14c0 14-9 24-20 30C21 52 12 42 12 28V14z"/><path d="M23 31l6 6 12-13"/></svg>
+      <h3>Temos nome.</h3><p>O produtor confia no Aminter e no método.</p>
+    </div>
+    <div>
+      <svg viewBox="0 0 64 64" fill="none" stroke="#2A7F02" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="4" width="28" height="56" rx="6"/><path d="M28 52h8"/><path d="M24 24l6 6 11-12"/></svg>
+      <h3>A Friday já roda.</h3><p>A equipe usa todo dia. Não é teoria. <a href="friday/">O que ela faz</a></p>
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="head"><h2>O material</h2><p>Para ler antes da reunião.</p></div>
-  <div class="links">
-    <a href="mercado/" target="_blank" rel="noopener"><b>Pesquisa de mercado</b><span>124 plataformas, o ranking dos top players do Brasil, preços e a dor do produtor.</span></a>
-    <a href="friday/" target="_blank" rel="noopener"><b>O que a Friday faz</b><span>As 19 tarefas, as rotinas e as ferramentas, nas palavras dela.</span></a>
-    <a href="#proximo"><b>Arquivos brutos</b><span>Vão pelo WhatsApp, num .zip, para passar na sua IA como quiser.</span></a>
+<!-- 7. reunião -->
+<div class="reuniao">
+  <div class="cal"><div class="mes">NOV</div><div class="dia">25</div><div class="sem">quarta · 10h</div></div>
+  <div>
+    <h2>Alinhar e botar no ar.</h2>
+    <div class="links">
+      <a href="mercado/">Pesquisa de mercado <span aria-hidden="true">›</span></a>
+      <a href="friday/">O que a Friday faz <span aria-hidden="true">›</span></a>
+    </div>
   </div>
-</section>
-
-<section id="proximo">
-  <div class="cta">
-    <h2>Próximo passo: reunião na quarta, 25/11</h2>
-    <p>Alinhar tudo e botar esse projeto no ar.</p>
-  </div>
-</section>
+</div>
 
 </div>
 </body>
