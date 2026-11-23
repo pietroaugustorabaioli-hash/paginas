@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>A Friday do produtor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Apresentação em uma coluna larga: tese, problema, mercado, a ideia em duas frentes, por que nós, os riscos e o próximo passo. Tema claro único. */
+:root{--bg:#fff;--fg:#17211a;--muted:#5d6b61;--line:#dde4de;--soft:#f3f6f3;--green:#2A7F02;--green-soft:#eef6e8;--ochre:#9a5b00;--ochre-soft:#fbf1df;
+ --d:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;--b:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--m:"IBM Plex Mono",ui-monospace,Consolas,monospace;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--b);font-size:16px;line-height:1.6;padding:32px max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--d);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.02;font-weight:700}
+h2{font-size:28px;font-weight:700}
+h3{font-size:19px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--m);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:20px;max-width:62ch;margin-top:14px}
+.meta{font-family:var(--m);font-size:13px;color:var(--muted);margin-top:16px}
+section{display:flex;flex-direction:column;gap:18px}
+.head{border-bottom:2px solid var(--fg);padding-bottom:8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;align-items:baseline}
+.head p{color:var(--muted);font-size:14px;max-width:60ch}
+blockquote{margin:0;border-left:4px solid var(--green);padding:6px 0 6px 18px;font-size:18px;font-style:italic;max-width:70ch}
+blockquote cite{display:block;font-style:normal;font-family:var(--m);font-size:12px;color:var(--muted);margin-top:6px}
+.lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.lista div{background:var(--soft);border-radius:6px;padding:12px 14px;font-size:15px}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.num{border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.num b{font-family:var(--d);font-size:32px;line-height:1.1}
+.num span{font-size:14px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:720px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+th{font-family:var(--m);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;background:var(--soft);border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td a{color:var(--fg);font-weight:600}
+.frentes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.frente{border:1px solid var(--line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.frente.ia{border-color:var(--green);background:#f8fbf5}
+.frente ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:15px}
+.tag{font-family:var(--m);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:3px;background:var(--ochre-soft);color:var(--ochre);align-self:flex-start}
+.frente.ia .tag{background:var(--green-soft);color:var(--green)}
+.fluxo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:f}
+.fluxo div{border-top:3px solid var(--green);padding-top:10px;font-size:15px}
+.fluxo b{display:block;font-family:var(--d);font-size:17px}
+.riscos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.risco{border-left:3px solid var(--ochre);padding:4px 0 4px 14px;font-size:15px}
+.risco b{display:block}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.links a{display:block;border:1px solid var(--line);border-radius:8px;padding:16px;text-decoration:none;color:var(--fg)}
+.links a:hover{border-color:var(--green)}
+.links a b{display:block;font-family:var(--d);font-size:18px;margin-bottom:4px}
+.links a span{font-size:14px;color:var(--muted)}
+.cta{background:var(--fg);color:#fff;border-radius:10px;padding:28px}
+.cta h2{color:#fff}
+.cta p{color:#d9e2db;margin-top:8px;font-size:17px}
+a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media (max-width:820px){.lista,.nums,.frentes,.fluxo,.riscos,.links{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Manejo Blindado · proposta de produto · 23/11/2026</div>
+  <h1>A Friday do produtor</h1>
+  <p class="lead">Um app que faz pelo produtor rural o que a Friday já faz pelo Frost todo dia. Organiza a lavoura, faz a conta e responde na hora, pelo app ou pelo WhatsApp.</p>
+  <p class="meta">Para a reunião com o Marco · ideia gravada pelo Pietro em 23/11, pesquisa de mercado de 124 plataformas e o mapa do que a Friday faz hoje</p>
+</header>
+
+<section>
+  <div class="head"><h2>O problema</h2><p>O produtor está no escuro.</p></div>
+  <blockquote>O cara está parado no tempo. Acontece um monte de coisa na lavoura dele, e ele está sempre no escuro, porque não tem contabilização, não tem ajuda. Tudo que é simples de fazer, uma análise de solo, uma análise de folha, ele precisa pedir ajuda para alguém.<cite>Pietro, 23/11/2026</cite></blockquote>
+  <div class="lista">
+    <div>Não sabe se está tendo lucro ou prejuízo.</div>
+    <div>Não sabe quanto custou cada aplicação.</div>
+    <div>Não tem registro de custo nem de lucro da lavoura.</div>
+    <div>Não tem contabilidade, mapa nem planejamento.</div>
+    <div>Precisa de alguém para ler uma análise de solo ou de folha.</div>
+    <div>Sabe que precisa de organização, mas isso dá trabalho e pede um escritório.</div>
+  </div>
+</section>
+
+<section>
+  <div class="head"><h2>O mercado está fraco</h2><p>124 plataformas mapeadas no Brasil, fora e em mercados vizinhos.</p></div>
+  <div class="nums">
+    <div class="num"><b>R$ 30 a 60</b><span>o que cobra quase todo chat de IA para o agro, por mês</span></div>
+    <div class="num"><b>grátis</b><span>JoIA (CNA), RAImundo (Embrapa), Bayer, John Deere: quem vende insumo dá a IA</span></div>
+    <div class="num"><b>~2.000</b><span>a maior base pagante achada (Floss), com o especialista respondendo</span></div>
+    <div class="num"><b>45%</b><span>dos cancelamentos do Aegro: o produtor parou de lançar os dados</span></div>
+  </div>
+  <p style="max-width:75ch">Quase tudo é a mesma coisa. Alguém escreveu um prompt, fez o app e lançou. O maior em IA é o JÃO iAGRO, e ele é só um chat no WhatsApp. Ninguém juntou num lugar só, bem feito, tudo de que o produtor precisa.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Quem</th><th>O que é</th><th>Preço</th><th>O que falta</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://jaoiagro.com/" target="_blank" rel="noopener">JÃO iAGRO</a></td><td>Chat de IA no WhatsApp, contas e foto de praga</td><td>R$ 59,90/mês (anual)</td><td>É só o chat; não tem as ferramentas nem método</td></tr>
+      <tr><td><a href="https://planteio.com.br/" target="_blank" rel="noopener">Planteio</a></td><td>Caderno de campo no WhatsApp, recado diário</td><td>R$ 19,90 a 39,90/mês</td><td>Registro e aviso, sem análise nem agronomia</td></tr>
+      <tr><td><a href="https://aegro.com.br/produtos/" target="_blank" rel="noopener">Aegro</a></td><td>Gestão completa da fazenda + IA no WhatsApp</td><td>sob consulta</td><td>Pesado de alimentar; quase metade cancela por isso</td></tr>
+      <tr><td><a href="https://www.agronomos.ia.br/precos" target="_blank" rel="noopener">agrônomo10X</a></td><td>IA que responde pelo conteúdo de uma comunidade</td><td>R$ 49,90 a 549,90/mês</td><td>Foco em agrônomo e geotecnologia, não no produtor</td></tr>
+      <tr><td><a href="https://assinatura.grupofloss.com/" target="_blank" rel="noopener">Floss</a></td><td>Assinatura de especialista, responde no WhatsApp</td><td>R$ 129 a 260/mês</td><td>Gente, sem ferramenta</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="head"><h2>A ideia</h2><p>Usar a fórmula que já funcionou dentro de casa.</p></div>
+  <p style="max-width:75ch">O Frost montou a Friday para ajudar ele, e a equipe usa ela direto, com recomendação de aplicação, calagem e gessagem, tratamento de semente, leitura de laudo, caderno de campo na visita, agenda e tarefas. A ideia é pegar a mesma fórmula e transformar num produto para o produtor: como se ele pagasse por mês uma assistente que entende de lavoura.</p>
+  <div class="frentes">
+    <div class="frente">
+      <span class="tag">Frente 1 · ferramentas, sem internet e sem IA</span>
+      <h3>O app que funciona no meio da roça</h3>
+      <p style="font-size:15px">A IA tem custo para manter. A grande sacada é ter muitas ferramentas que ajudam sem IA nenhuma e rodam sem sinal.</p>
+      <ul>
+        <li>Análise de solo e de folha</li>
+        <li>Contas a pagar e a receber</li>
+        <li>Estoque e balanço de custos da safra</li>
+        <li>Relatórios de monitoramento, de aplicação e de planejamento</li>
+        <li>Mapa da fazenda, e tudo o que o Hub já faz</li>
+        <li>Clima, cotação e notícia relevante</li>
+        <li>Agenda, linha do tempo da safra e planejamento</li>
+      </ul>
+    </div>
+    <div class="frente ia">
+      <span class="tag">Frente 2 · a IA, no app e no WhatsApp</span>
+      <h3>A Friday dele</h3>
+      <p style="font-size:15px">O produtor conversa como a gente conversa com a Friday, mandando foto, áudio e pergunta. Ela responde, gera o que precisa e salva tudo nas ferramentas.</p>
+      <ul>
+        <li>Recomendação de aplicação, conferida contra o registro do produto</li>
+        <li>Calagem, gessagem, tratamento de semente, relação de insumos</li>
+        <li>Leitura de laudo de solo e de folha, por talhão</li>
+        <li>Caderno de campo: o que ele manda vira registro</li>
+        <li>Plano de plantio, briefing do dia, agenda e tarefas</li>
+        <li>Treinada no que o Manejo Blindado quer que ela seja</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fluxo">
+    <div><b>Fala</b>Ele manda foto ou áudio pelo WhatsApp ou pelo app.</div>
+    <div><b>A IA faz</b>Lê, calcula e responde com o que fazer.</div>
+    <div><b>Salva</b>Custo, aplicação, laudo e visita entram na ferramenta certa.</div>
+    <div><b>Acompanha</b>Ele abre o app e vê a safra inteira, sem ter digitado nada.</div>
+  </div>
+  <p style="max-width:75ch;color:var(--muted);font-size:15px">Isso ataca de frente o motivo nº 1 de cancelamento do setor. O produtor não precisa alimentar o sistema, porque a IA alimenta por ele.</p>
+</section>
+
+<section>
+  <div class="head"><h2>Cérebro coletivo</h2><p>Sem invadir a vida de ninguém.</p></div>
+  <p style="max-width:75ch">Não é para ter a agenda do produtor. É saber o que a base está perguntando, como o que aplicar na soja agora e onde a lavoura está travando. Isso vira um dado que ninguém mais no mercado tem, e volta como conteúdo e como produto.</p>
+</section>
+
+<section>
+  <div class="head"><h2>Por que nós</h2></div>
+  <div class="lista">
+    <div><b>Temos base.</b> Quem lança app de agro tem a ideia e não tem público.</div>
+    <div><b>Temos nome e respeito.</b> O produtor confia no Aminter e no método.</div>
+    <div><b>Já usamos.</b> A Friday roda todo dia na equipe; não é teoria.</div>
+  </div>
+  <p style="max-width:75ch">E o produtor migra para o que tem mais tecnologia quando aparece. Quem chegar primeiro com algo bem feito, que ele vai sentir falta, fica.</p>
+</section>
+
+<section>
+  <div class="head"><h2>O que a pesquisa pede para cuidar</h2></div>
+  <div class="riscos">
+    <div class="risco"><b>Custo de IA por assinante</b>Planos com IA pesada gastam de US$ 15 a 30 por usuário ativo por mês (dado de fornecedor). Por isso a frente offline vem primeiro.</div>
+    <div class="risco"><b>Receita agronômica</b>Defensivo só se vende com receita de agrônomo (Lei 14.785/2023). A IA dá método e conta; a receita para a área dele é de um agrônomo.</div>
+    <div class="risco"><b>O grátis está chegando</b>CNA, Embrapa, Bayer e John Deere dão IA de graça. Chat genérico não se vende; ferramenta junto com método se vende.</div>
+    <div class="risco"><b>Preço</b>Chat sozinho vale R$ 30 a 60. Acima de R$ 200, todo concorrente tem gente respondendo ou a fazenda inteira no sistema.</div>
+  </div>
+</section>
+
+<section>
+  <div class="head"><h2>O material</h2><p>Para ler antes da reunião.</p></div>
+  <div class="links">
+    <a href="mercado/" target="_blank" rel="noopener"><b>Pesquisa de mercado</b><span>124 plataformas, o ranking dos top players do Brasil, preços e a dor do produtor.</span></a>
+    <a href="friday/" target="_blank" rel="noopener"><b>O que a Friday faz</b><span>As 19 tarefas, as rotinas e as ferramentas, nas palavras dela.</span></a>
+    <a href="#proximo"><b>Arquivos brutos</b><span>Vão pelo WhatsApp, num .zip, para passar na sua IA como quiser.</span></a>
+  </div>
+</section>
+
+<section id="proximo">
+  <div class="cta">
+    <h2>Próximo passo: reunião na quarta, 25/11</h2>
+    <p>Alinhar tudo e botar esse projeto no ar.</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mercado do app MB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: coluna de 1240px; topo com tese e números, depois dor, preço, padrões, buracos e o catálogo filtrável. Tema claro único (regra da casa: fundo branco). */
+:root{
+  --bg:#ffffff; --fg:#17211a; --muted:#5d6b61; --line:#dde4de; --soft:#f3f6f3;
+  --green:#2A7F02; --green-soft:#eaf4e3; --ochre:#9a5b00; --ochre-soft:#fbf1df;
+  --red:#a4262c; --red-soft:#fbe9ea; --blue:#1f5f99; --blue-soft:#e6eff8;
+  --f-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+a{color:var(--green)} a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.05}
+h2{font-size:24px;font-weight:600}
+h3{font-size:17px;font-weight:600}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;border-bottom:2px solid var(--fg);padding-bottom:8px}
+.sec-head p{margin:0;color:var(--muted);font-size:14px;max-width:70ch}
+
+/* topo */
+header{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px;align-items:end}
+header .meta{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-top:10px}
+.tese{border-left:4px solid var(--green);padding:4px 0 4px 16px;font-size:16px;margin:0}
+.tese b{font-weight:600}
+.leitura{font-size:13px;color:var(--muted);margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--soft);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi .v{font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1.1}
+.kpi .l{font-size:13px;color:var(--muted)}
+.kpi .n{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.kpi.alvo{background:var(--ochre-soft)} .kpi.alvo .v{color:var(--ochre)}
+
+/* dores */
+.dores{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.dor{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1.25fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.dor .rank{font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--green);line-height:1}
+.dor .t h3{margin-bottom:6px}
+.dor .t p{margin:0 0 8px;font-size:14px}
+.forca{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.forca i{display:inline-block;width:14px;height:8px;border-radius:2px;background:var(--line)}
+.forca i.on{background:var(--green)}
+.quotes{display:flex;flex-direction:column;gap:10px;min-width:0}
+blockquote{margin:0;padding:8px 12px;background:var(--soft);border-radius:4px;font-size:14px}
+blockquote.nosso{background:var(--green-soft)}
+blockquote cite{display:block;font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:4px}
+.dado{font-family:var(--f-display);font-weight:700;font-size:20px;color:var(--fg)}
+
+/* preço */
+.chart-box{overflow-x:auto;border:1px solid var(--line);border-radius:6px;padding:12px 8px 4px}
+.chart-box svg{display:block;min-width:760px;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:50%;display:inline-block}
+.ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.step{border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.step .r{font-family:var(--f-mono);font-size:13px;font-weight:500}
+.step .w{font-size:13px;color:var(--muted)}
+.step.alvo{border-color:var(--ochre);background:var(--ochre-soft)}
+
+/* padrões, buracos, riscos */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.box{border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.box p{margin:0;font-size:14px}
+.box .who{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-family:var(--f-mono);font-size:11px;padding:2px 7px;border-radius:3px;background:var(--soft);color:var(--fg);white-space:nowrap}
+.box.buraco{border-top:3px solid var(--green)}
+.box.risco{border-top:3px solid var(--red)}
+.tag{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:3px;white-space:nowrap}
+.tag.inf{background:var(--ochre-soft);color:var(--ochre)}
+.tag.conf{background:var(--green-soft);color:var(--green)}
+.tag.prov{background:var(--blue-soft);color:var(--blue)}
+.tag.inc{background:var(--red-soft);color:var(--red)}
+
+/* catálogo */
+.filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+.filters input[type=search]{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:4px;min-width:0;width:220px;background:var(--bg);color:var(--fg)}
+.filters select{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg)}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--fg);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.count{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-left:auto}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card .top h3 a{color:var(--fg);text-decoration:none} .card .top h3 a:hover{text-decoration:underline}
+.card .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.price{font-family:var(--f-mono);font-size:13px;font-weight:500;text-align:right;white-space:nowrap}
+.price small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+.card p{margin:0;font-size:14px}
+.card .lab{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:2px}
+.card ul{margin:0;padding-left:18px;font-size:13.5px;display:flex;flex-direction:column;gap:3px}
+.card .ideia{background:var(--green-soft);border-radius:4px;padding:8px 10px;font-size:13.5px}
+.card .ideia b{color:var(--green)}
+.card .foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:auto}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}
+
+.rank-box{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+.rank{width:100%;min-width:900px;border-collapse:collapse;font-size:14px}
+.rank th{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--soft)}
+.rank td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.rank tr:last-child td{border-bottom:0}
+.rank td.pos{font-family:var(--f-display);font-size:22px;font-weight:700;color:var(--green);width:44px}
+.rank td.nm a{font-weight:600;color:var(--fg)} .rank td.nm .tag{margin-left:6px}
+.rank td.al{font-size:13px;color:var(--muted);max-width:220px}
+.rank td.pr{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:8px}
+footer p{margin:0;max-width:110ch}
+
+@media (max-width:900px){
+  header{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dor{grid-template-columns:36px minmax(0,1fr)} .dor .quotes{grid-column:2}
+  .grid2,.grid3,.cards{grid-template-columns:1fr}
+  .filters{position:static}
+  .filters input[type=search]{width:100%}
+  .count{margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:#b9c6bc}}
+</style>
+
+</head><body><div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Manejo Blindado · ferramenta de assinatura · pesquisa de mercado</div>
+      <h1>Quem já vende o que a gente quer montar</h1>
+      <div class="meta num" id="meta">23/11/2026</div>
+    </div>
+    <div>
+      <p class="tese" id="tese"></p>
+      <p class="leitura" id="leitura"></p>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section id="top">
+    <div class="sec-head"><h2>Os top players do Brasil</h2><p>Ordenados pelo alcance que cada um declara ou que saiu em fonte, do maior ao menor. A etiqueta marca quem vende o mais parecido com o app do MB.</p></div>
+    <div class="rank-box"><table class="rank"><thead><tr><th>#</th><th>Plataforma</th><th>O que é</th><th>Alcance</th><th>Preço</th><th>Por que importa</th></tr></thead><tbody id="ranking"></tbody></table></div>
+  </section>
+
+  <section id="dor">
+    <div class="sec-head"><h2>A dor principal do nosso mercado</h2><p>Ordenada pela força da prova, não por palpite. Verde claro é fala de produtor que falou com o MB; cinza é fonte de fora.</p></div>
+    <div class="dores" id="dores"></div>
+  </section>
+
+  <section id="preco">
+    <div class="sec-head"><h2>Quanto cobram por mês</h2><p>Cada ponto é uma plataforma com preço público, no plano pago mais barato, em R$ por mês. A faixa marcada é o alvo do MB.</p></div>
+    <div class="legend" id="legend"></div>
+    <div class="chart-box"><svg id="chart" role="img" aria-label="Preço mensal por plataforma e categoria"></svg></div>
+    <div class="ladder" id="ladder"></div>
+  </section>
+
+  <section id="montando">
+    <div class="sec-head"><h2>O que o mercado está montando agora</h2><p>Padrões que se repetem entre os lançamentos de 2025 e 2026.</p></div>
+    <div class="grid3" id="padroes"></div>
+  </section>
+
+  <section id="brechas">
+    <div class="sec-head"><h2>Onde há espaço e onde está o perigo</h2><p>Buraco por ausência de achado é ausência, não prova; vai marcado.</p></div>
+    <div class="grid2">
+      <div style="display:flex;flex-direction:column;gap:12px"><h3>Buracos que casam com o MB</h3><div id="buracos" style="display:flex;flex-direction:column;gap:12px"></div></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><h3>Riscos</h3><div id="riscos" style="display:flex;flex-direction:column;gap:12px"></div></div>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="sec-head"><h2>Todas as plataformas, uma por uma</h2><p>O que entrega, quanto custa, o que está montando, onde falha e o que serve ao MB.</p></div>
+    <div class="filters">
+      <input type="search" id="q" placeholder="Buscar nome, função, país" aria-label="Buscar">
+      <div class="seg" id="f-cat" role="group" aria-label="Categoria"></div>
+      <div class="seg" id="f-geo" role="group" aria-label="Onde"></div>
+      <select id="ord" aria-label="Ordenar"><option value="rel">Mais relevantes ao MB</option><option value="preco">Preço, menor primeiro</option><option value="precod">Preço, maior primeiro</option><option value="nome">Nome</option></select>
+      <span class="count num" id="count"></span>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <footer id="rodape"></footer>
+</div>
+
+<script>
+(function(){
+const CAT={
+ "chat-ia":{n:"Chat de IA agro",c:"#2A7F02"},
+ "ia-de-especialista":{n:"IA de um especialista",c:"#9a5b00"},
+ "conteudo-comunidade":{n:"Conteúdo e comunidade",c:"#1f5f99"},
+ "consultoria-remota":{n:"Consultoria remota",c:"#7a3e9d"},
+ "gestao-registro":{n:"Gestão e registro",c:"#4d5a52"},
+ "calculadora":{n:"Calculadora",c:"#0f7c78"},
+ "cooperativa-revenda-fabricante":{n:"Coop, revenda, fabricante",c:"#a4262c"},
+ "outro":{n:"Outro",c:"#8a8f8b"}
+};
+const CONF={"confirmado":"conf","provável":"prov","provavel":"prov","incerto":"inc"};
+const TIPO={"queixa-usuario":"queixa de usuário","limite-observado":"limite observado","inferencia":"inferência"};
+const brl=v=>v==null?"sob consulta":v===0?"grátis":"R$ "+(v>=100?Math.round(v).toLocaleString("pt-BR"):v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2}));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const el=id=>document.getElementById(id);
+const isBR=p=>/brasil/i.test(p.pais||"");
+
+fetch("dados.json").then(r=>r.json()).then(render).catch(e=>{el("cards").innerHTML='<div class="empty">Os dados não carregaram ('+esc(e.message)+'). Recarregue a página.</div>'});
+
+function render(D){
+ const P=D.plataformas;
+ const paises=new Set(P.map(p=>(p.pais||"").split(/[,/]/)[0].trim()).filter(Boolean));
+ el("meta").textContent=`Pesquisa de ${D.meta.data} · ${P.length} plataformas · ${paises.size} países · ${D.meta.fontes} fontes lidas · para o brainstorm com o Marco (${D.meta.brainstorm})`;
+ el("tese").innerHTML=D.meta.tese;
+ el("leitura").innerHTML=D.meta.leitura;
+
+ // KPIs
+ const pagos=P.filter(p=>p.preco_mes_brl>0);
+ const chatBR=pagos.filter(p=>p.categoria==="chat-ia"&&isBR(p)).map(p=>p.preco_mes_brl).sort((a,b)=>a-b);
+ const med=a=>a.length?(a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2):null;
+ const gratis=P.filter(p=>p.preco_mes_brl===0).length;
+ const acima=pagos.filter(p=>p.preco_mes_brl>=200).length;
+ el("kpis").innerHTML=[
+  [P.length,"plataformas mapeadas",`${P.filter(isBR).length} no Brasil, ${P.length-P.filter(isBR).length} fora`],
+  [gratis,"de graça para o produtor","institucional, revenda, fabricante, calculadora"],
+  [brl(med(chatBR)),"mediana do chat de IA pago no Brasil",`n=${chatBR.length} com preço público`],
+  [acima,"cobram R$ 200 ou mais por mês",`de ${pagos.length} com preço público; alvo do MB: R$ 200 a 250`,"alvo"]
+ ].map(k=>`<div class="kpi ${k[3]||""}"><span class="v num">${esc(k[0])}</span><span class="l">${esc(k[1])}</span><span class="n">${esc(k[2])}</span></div>`).join("");
+
+ // Ranking
+ el("ranking").innerHTML=(D.ranking||[]).map((r,i)=>`<tr><td class="pos num">${i+1}</td>
+  <td class="nm"><a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.nome)}</a>${r.direto?'<span class="tag conf">concorrente direto</span>':""}</td>
+  <td>${esc(r.tipo)}</td><td class="al">${esc(r.alcance)}</td><td class="pr">${esc(r.preco)}</td><td>${esc(r.porque)}</td></tr>`).join("");
+
+ // Dores
+ el("dores").innerHTML=D.dores.map((d,i)=>`<div class="dor"><div class="rank num">${i+1}</div>
+  <div class="t"><h3>${esc(d.titulo)}</h3><p>${esc(d.resumo)}</p>${d.numero?`<p><span class="dado num">${esc(d.numero)}</span> <span style="color:var(--muted);font-size:13px">${esc(d.numero_fonte||"")}</span></p>`:""}
+   <div class="forca">força da prova ${[1,2,3,4,5].map(n=>`<i class="${n<=d.forca?"on":""}"></i>`).join("")} ${esc(d.forca_txt||"")}</div></div>
+  <div class="quotes">${(d.citacoes||[]).map(q=>`<blockquote class="${q.nosso?"nosso":""}">“${esc(q.texto)}”<cite>${q.url?`<a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.quem)}</a>`:esc(q.quem)}</cite></blockquote>`).join("")}</div></div>`).join("");
+
+ // Gráfico
+ drawChart(P,D.meta.alvo||[200,250]);
+ el("legend").innerHTML=Object.entries(CAT).filter(([k])=>P.some(p=>p.categoria===k&&p.preco_mes_brl>0)).map(([k,v])=>`<span><i class="sw" style="background:${v.c}"></i>${v.n}</span>`).join("")+`<span><i class="sw" style="background:var(--ochre-soft);border:1px solid var(--ochre);border-radius:2px"></i>alvo do MB</span>`;
+ el("ladder").innerHTML=D.escada.map(s=>`<div class="step ${s.alvo?"alvo":""}"><span class="r num">${esc(s.faixa)}</span><span>${esc(s.quem)}</span><span class="w">${esc(s.leitura)}</span></div>`).join("");
+
+ // Padrões, buracos, riscos
+ el("padroes").innerHTML=D.padroes.map(p=>`<div class="box"><h3>${esc(p.titulo)}</h3><p>${esc(p.texto)}</p><div class="who">${(p.quem||[]).map(q=>`<span class="chip">${esc(q)}</span>`).join("")}</div></div>`).join("");
+ const tg=t=>t?`<span class="tag ${t==="inferência"?"inf":t==="confirmado"?"conf":t==="provável"?"prov":"inc"}">${esc(t)}</span>`:"";
+ el("buracos").innerHTML=D.buracos.map(b=>`<div class="box buraco"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(b.titulo)}</h3>${tg(b.grau)}</div><p>${esc(b.texto)}</p></div>`).join("");
+ el("riscos").innerHTML=D.riscos.map(b=>`<div class="box risco"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(b.titulo)}</h3>${tg(b.grau)}</div><p>${esc(b.texto)}</p></div>`).join("");
+
+ // Catálogo
+ const st={cat:"todas",geo:"todos",q:"",ord:"rel"};
+ const cats=Object.keys(CAT).filter(k=>P.some(p=>p.categoria===k));
+ el("f-cat").innerHTML=[["todas","Todas"],...cats.map(k=>[k,CAT[k].n])].map(([k,n])=>`<button type="button" data-k="${k}" aria-pressed="${k==="todas"}">${esc(n)} <span class="num" style="opacity:.6">${k==="todas"?P.length:P.filter(p=>p.categoria===k).length}</span></button>`).join("");
+ el("f-geo").innerHTML=[["todos","Brasil e fora"],["br","Brasil"],["fora","Fora do Brasil"]].map(([k,n])=>`<button type="button" data-k="${k}" aria-pressed="${k==="todos"}">${n}</button>`).join("");
+ const seg=(id,key)=>el(id).addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st[key]=b.dataset.k;el(id).querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));draw()});
+ seg("f-cat","cat");seg("f-geo","geo");
+ el("q").addEventListener("input",e=>{st.q=e.target.value.toLowerCase();draw()});
+ el("ord").addEventListener("change",e=>{st.ord=e.target.value;draw()});
+ function draw(){
+  let L=P.filter(p=>(st.cat==="todas"||p.categoria===st.cat)&&(st.geo==="todos"||(st.geo==="br")===isBR(p))&&(!st.q||JSON.stringify(p).toLowerCase().includes(st.q)));
+  const pv=p=>p.preco_mes_brl==null?Infinity:p.preco_mes_brl;
+  if(st.ord==="preco")L.sort((a,b)=>pv(a)-pv(b));
+  else if(st.ord==="precod")L.sort((a,b)=>(b.preco_mes_brl??-1)-(a.preco_mes_brl??-1));
+  else if(st.ord==="nome")L.sort((a,b)=>a.nome.localeCompare(b.nome,"pt"));
+  else L.sort((a,b)=>(b.relevancia||0)-(a.relevancia||0));
+  el("count").textContent=`${L.length} de ${P.length}`;
+  el("cards").innerHTML=L.length?L.map(card).join(""):'<div class="empty">Nenhuma plataforma com esse filtro.</div>';
+ }
+ draw();
+ el("rodape").innerHTML=D.rodape.map(t=>`<p>${t}</p>`).join("");
+}
+
+function card(p){
+ const c=CAT[p.categoria]||CAT.outro;
+ const probs=(p.problemas||[]).filter(x=>x&&x.texto);
+ return `<article class="card" style="border-top:3px solid ${c.c}">
+  <div class="top"><div style="min-width:0"><h3>${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.nome)}</a>`:esc(p.nome)}</h3>
+   <div class="sub">${esc(p.pais)} · ${esc(c.n)}${p.modelo?" · "+esc(p.modelo):""}</div></div>
+   <div class="price num">${brl(p.preco_mes_brl)}${p.preco_mes_brl>0?"<small>por mês</small>":""}</div></div>
+  <p>${esc(p.o_que_entrega)}</p>
+  ${p.preco?`<p style="font-size:12.5px;color:var(--muted)">${esc(p.preco)}</p>`:""}
+  ${p.o_que_estao_montando?`<div><div class="lab">Montando agora</div><p>${esc(p.o_que_estao_montando)}</p></div>`:""}
+  ${probs.length?`<div><div class="lab">Onde falha</div><ul>${probs.map(x=>`<li>${esc(x.texto)} <span class="tag ${x.tipo==="inferencia"?"inf":x.tipo==="queixa-usuario"?"inc":"prov"}">${TIPO[x.tipo]||esc(x.tipo)}</span>${x.fonte_url?` <a href="${esc(x.fonte_url)}" target="_blank" rel="noopener" style="font-size:11px">fonte</a>`:""}</li>`).join("")}</ul></div>`:""}
+  ${p.ideia_para_mb?`<div class="ideia"><b>Para o MB:</b> ${esc(p.ideia_para_mb)}</div>`:""}
+  <div class="foot">${p.publico?`<span class="chip">${esc(p.publico).slice(0,80)}</span>`:""}${p.usuarios&&!/sem dado/i.test(p.usuarios)?`<span class="chip">usuários: ${esc(p.usuarios).slice(0,70)}</span>`:""}<span class="tag ${CONF[p.confianca]||"inc"}">${esc(p.confianca||"incerto")}</span></div>
+ </article>`;
+}
+
+function drawChart(P,alvo){
+ const svg=el("chart");
+ const rows=Object.keys(CAT).filter(k=>P.some(p=>p.categoria===k&&p.preco_mes_brl>0));
+ const W=1200,L=200,R=30,T=30,RH=46,H=T+rows.length*RH+34;
+ const pts=P.filter(p=>p.preco_mes_brl>0);
+ const max=1000; // acima de R$ 1.000 o ponto fica na borda (o valor está no rótulo ao passar o mouse)
+ // escala raiz quadrada: espalha a faixa de R$ 10 a 100, onde está a maioria
+ const sx=v=>L+(W-L-R)*Math.sqrt(Math.min(v,max)/max);
+ svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+ let s="";
+ s+=`<rect x="${sx(alvo[0])}" y="${T-14}" width="${sx(alvo[1])-sx(alvo[0])}" height="${rows.length*RH+14}" fill="#fbf1df" stroke="#9a5b00" stroke-dasharray="3 3"/>`;
+ s+=`<text x="${(sx(alvo[0])+sx(alvo[1]))/2}" y="${T-18}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#9a5b00">alvo MB</text>`;
+ [10,30,60,100,200,300,500,1000].forEach(t=>{const x=sx(t);
+  s+=`<line x1="${x}" x2="${x}" y1="${T-6}" y2="${T+rows.length*RH}" stroke="#dde4de"/>`;
+  s+=`<text x="${x}" y="${H-12}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#5d6b61">R$ ${t===1000?"1.000+":t}</text>`;});
+ rows.forEach((k,i)=>{const y=T+i*RH+RH/2;
+  s+=`<text x="${L-14}" y="${y+4}" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="13" fill="#17211a">${CAT[k].n}</text>`;
+  s+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#eef2ee"/>`;
+  const rp=pts.filter(p=>p.categoria===k).sort((a,b)=>a.preco_mes_brl-b.preco_mes_brl);
+  let lastX=-99,lane=0;
+  rp.forEach(p=>{const x=sx(p.preco_mes_brl);lane=(x-lastX<9)?(lane+1)%3:0;lastX=x;const yy=y+(lane===1?-9:lane===2?9:0);
+   s+=`<circle cx="${x}" cy="${yy}" r="6" fill="${CAT[k].c}" fill-opacity=".85" stroke="#fff" stroke-width="1.5"><title>${esc(p.nome)}: ${brl(p.preco_mes_brl)} por mês</title></circle>`;});
+  const top=rp[rp.length-1]; if(top){const x=sx(top.preco_mes_brl);s+=`<text x="${Math.min(x+10,W-R-4)}" y="${y-10}" text-anchor="${x>W-160?"end":"start"}" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#5d6b61">${esc(top.nome.split(/[(,/]/)[0].trim())}</text>`;}
+ });
+ svg.innerHTML=s;
+}
+})();
+</script>
+</body></html>

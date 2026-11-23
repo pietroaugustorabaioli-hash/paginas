@@ -1,0 +1,78 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O que a Friday faz pelo Frost</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+html,body{background:#fff;color:#17211a;color-scheme:light}
+body{font-family:"IBM Plex Sans",system-ui,sans-serif;max-width:1100px;margin:0 auto;padding:24px 16px 64px;font-size:15px;line-height:1.55}
+h1{font-size:26px;margin:0} .sub{color:#5d6b61;font-size:14px;margin:4px 0 24px}
+h2{font-size:18px;border-top:2px solid #17211a;padding-top:10px;margin:28px 0 10px}
+ol,ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+b{font-weight:600} .m{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#5d6b61}
+.nota{background:#fbf1df;color:#7a4a00;padding:8px 12px;border-radius:4px;font-size:14px;margin-top:10px}
+</style>
+<h1>O que a Friday faz pelo Frost</h1>
+<p class="sub">Resposta da Friday pela ponte, 23/11/2026 14:33 a 14:34, em 6 partes. Organizada por mim, sem tirar nada; os termos técnicos são dela.</p>
+
+<h2>1. Canais e base</h2>
+<ul>
+<li><b>Entrada:</b> Telegram do Frost (texto, áudio, foto, PDF), voz local (app friday-voz, microfone do PC), terminal Claude Code, a ponte com o Jarvis e arquivos que ele joga em Downloads (laudos, áudios do WhatsApp).</li>
+<li><b>Saída:</b> Telegram, voz (edge-tts, voz Thalita pt-BR), Google Drive (GDoc e PDF na pasta do produtor), páginas no claude.ai, Google Agenda e Google Tarefas.</li>
+<li><b>WhatsApp:</b> não opera direto. Só lê áudio que ele baixa e um acervo SQLite, só leitura, do WhatsApp do MB.</li>
+<li><b>E-mail:</b> pelo gmail_op.py, só quando ele pede triagem.</li>
+<li><b>Áudio do Telegram:</b> transcrição pelo Groq Whisper, sem alternativa local hoje.</li>
+<li><b>Memória:</b> arquivos em memory/ (NOW.md de foco, cliente_*.md, feedback_*.md, cadernos de visita) e registros de trabalho por projeto.</li>
+</ul>
+
+<h2>2. Consultoria agronômica (sempre por pedido do Frost, no Telegram ou na voz)</h2>
+<ol>
+<li><b>Recomendação de aplicação</b> (praga, nutricional, herbicida, fungicida): confere compatibilidade e ordem de mistura da calda, confere produto e dose contra o AGROFIT, gera o documento no modelo do MB, PDF, sobe na pasta do produtor no Drive e registra no Hub Safras. Fica pronto: GDoc, PDF, card no Hub e link no Telegram.</li>
+<li><b>Calagem e gessagem:</b> do laudo de solo à dose por talhão, escolha do material, auditoria e documento do produtor.</li>
+<li><b>Manejo biológico:</b> do laudo de DNA e nematoide à escolha da cepa, com documento para o produtor e para a equipe, em PDF.</li>
+<li><b>Tratamento de semente:</b> ml por kg, % do limite de volume, ml por saquinho, ordem dos baldes, documento clonado do modelo mais completo.</li>
+<li><b>Relação de insumos (estoque):</b> doses por hectare vezes área, totais em toneladas, PDF no padrão do MB.</li>
+<li><b>Interpretação de laudo foliar e de solo</b> contra régua (Penn State, ESALQ, Embrapa), por talhão.</li>
+<li><b>App de análise foliar do MB</b> (Supabase): o laudo em PDF entra por script, que testa, salva e desfaz sozinho se falhar; depois ela importa para produção e republica o site. Fazenda, safra, talhão. Frost e Aminter consultam lá em vez do PDF do laboratório.</li>
+<li><b>Pesquisa técnica com fonte:</b> registro no MAPA e AGROFIT, cepa, dose, intervalo de herbicida, régua foliar, ensaio da Embrapa ou de universidade. Três fontes quando é comparação ou decisão.</li>
+<li><b>Caderno de campo:</b> durante a visita (ex.: Asa Branca do Jervásio), anota tudo que chega no Telegram (estádio, praga, nós, talhão) num arquivo por visita.</li>
+<li><b>Desenhos técnicos</b> (linhas gêmeas de milho), cálculo de semente por metro e por disco, densidade.</li>
+<li><b>Plano de plantio,</b> semente por metro e preparo de solo, quando ele pede.</li>
+<li><b>Material para o Aminter</b> (YouTube, artigo de sensoriamento), quando pedido.</li>
+</ol>
+
+<h2>3. Operação e comercial</h2>
+<ol start="13">
+<li><b>Agenda Google:</b> cria evento direto quando ele fala, com cor por tipo (verde cliente, azul interno, laranja campo, amarelo pessoal, vermelho urgente). Mover ou apagar só perguntando.</li>
+<li><b>Tarefas:</b> Google Tarefas, listas Pessoal, Manejo Blindado e Esperando alguém, com o cliente no título; ele distribui.</li>
+<li><b>Briefing:</b> clima, agenda, e-mails, notícias, bloqueios e plano do dia. Só sob pedido, sem horário fixo.</li>
+<li><b>Triagem de e-mail:</b> categoriza e rascunha resposta, sob pedido.</li>
+<li><b>Comercial (modo vendedora):</b> leads, objeção, proposta, follow-up, base de fatos com grau de confiança. Mensagem a terceiro só sai com a confirmação do Frost, e ela se apresenta como FRIDAY.</li>
+<li><b>Contas e fechamentos pontuais</b> com script e teste (OCR de notas fiscais, relação de pagamentos).</li>
+<li><b>Resolver coisa com empresa pelo site,</b> em modo sombra: ele aprova cada mensagem.</li>
+</ol>
+
+<h2>4. Rotinas automáticas e monitoramento</h2>
+<ul>
+<li><b>Agendadas no Windows:</b> vigia dos MCPs e da ponte a cada 2 min (religa o que cai); backup do banco do app foliar no domingo às 20h; reinício sob demanda (hoje só em simulação).</li>
+<li><b>No início de cada sessão:</b> confere voz, porta 5111, MCPs e vigia, lê o NOW.md, manda o status no Telegram, confere a saúde da memória e a caixa da ponte.</li>
+<li><b>A cada mensagem:</b> lembrete de identidade e busca de recado do Jarvis.</li>
+<li><b>Antes de usar ferramenta:</b> valida a formatação do Telegram, valida voz em português, trava edição irreversível, limita subagentes a 5 por tarefa.</li>
+<li><b>Depois:</b> registra erro de comando e sinais de correção do Frost.</li>
+<li><b>No fim do turno:</b> confere se respondeu no Telegram, extrai memória da sessão e dispara uma reflexão em conversas com mais de 15 turnos. Antes de compactar a conversa, salva o estado.</li>
+<li><b>Não tem:</b> briefing automático, monitor de lavoura nem monitor de WhatsApp rodando sozinho.</li>
+</ul>
+
+<h2>5. O que faz sem ele pedir</h2>
+<ul>
+<li>Atualiza a memória do cliente e o NOW.md; grava lição quando erra; audita o documento antes de entregar; avisa risco técnico antes de executar; anota pendência; avisa quando uma ferramenta cai.</li>
+</ul>
+<p class="nota">Ela avisou, agora: o MCP do Hub está dando erro 401, e o registro no Hub Safras está parado.</p>
+
+<h2>6. O que fez uma vez só e sabe refazer</h2>
+<ul>
+<li>App de voz novo (friday-voz); instalador da FRIDAY lite para PC secundário; a ponte v2 com o Jarvis; montagem do Notion (encerrada); auditoria do processo de calagem; auditoria de laudos de terceiros (EarthOptics, Ceres); análise de densidade de milho verde; comparativo Bt VIP3 x PRO4; mapa offline (QField); página web de fechamento; OCR de notas; negociação com a Algar (vetada pelo Frost); otimização do PC.</li>
+</ul>
+
+<h2>Ferramentas</h2>
+<p class="m">Claude Code, Python, LibreOffice, Chrome headless, Playwright, Drive API, Supabase, Groq, edge-tts, Google Agenda e Tarefas, Gmail, Hub Safras MCP, Notion MCP, páginas do claude.ai.</p>
+<p class="sub" style="margin-top:20px">Ela se ofereceu para abrir em detalhe qualquer item que o Pietro escolher. Partes literais em D:\Jarvis\4-ESTADO\friday-mapa\.</p>
+</html>
